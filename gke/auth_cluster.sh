@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# optional to use $1 to provide a cluster name
+# optional: use $1 to provide a cluster name 
+# when no parameter is provided = project_id-cluster is being used 
 
 export PROJECT_ID=`gcloud config get-value project`
 if [ "${1}" == "" ] ; then
