@@ -2,7 +2,6 @@
 
 Follow the steps at https://istio.io/docs/examples/bookinfo/
 
-
 *  Label the namespace that will host the application with istio-injection=enabled:
 ```
 kubectl label namespace default istio-injection=enabled
@@ -51,3 +50,15 @@ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 ```
 curl -s http://${GATEWAY_URL}/productpage | grep -o "<title>.*</title>"
 ```
+* Makesure mTLS is enabled
+```
+pod=`kubectl get pods | head -2 | tail -1 | awk '{print $1}'`
+istioctl authn tls-check $pod
+```
+* Create destination rule
+```
+kubectl apply -f gcp-infra-stuff/gke/istio/bookinfo/destination-rule-all-mtls.yaml
+```
+
+* That's it - now let's play with Istio
+
