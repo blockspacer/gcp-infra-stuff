@@ -1,0 +1,18 @@
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/amiteinav/go-stuff']
+  env: ['PROJECT_ROOT=charged-polymer-221319']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["build", "-t", "gcr.io/charged-polymer-221319/hello:$BUILD_ID", "."]
+  dir: 'go-stuff'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "gcr.io/charged-polymer-221319/hello:$BUILD_ID"]
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - 'set'
+  - 'image'
+  - 'deployment/hello-deployment'
+  - 'hello=gcr.io/charged-polymer-221319/hello:$BUILD_ID'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=standard-cluster-1'
