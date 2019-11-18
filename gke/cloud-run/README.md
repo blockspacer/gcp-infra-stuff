@@ -50,7 +50,7 @@ kubectl get pods --namespace tekton-pipelines
 kubectl create -f gcp-infra-stuff/gke/tekton/taskrun.yaml
 ```
 
-### deploying to Cloud Run
+### Deploying to Cloud Run
 * Since this is a manged service, use the gcloud to deploy 
 ```
 gcloud beta run deploy pdf-tekton-svc \
@@ -77,7 +77,7 @@ gcloud beta container clusters create cloud-run-gke \
 --scopes cloud-platform
 
 ```
-* to use a manged service, use the gcloud to deploy 
+* To use a manged service, use the gcloud to deploy 
 ```
 gcloud config set run/cluster_location us-central1-b
 
@@ -92,10 +92,7 @@ gcloud beta run deploy pdf-tekton-svc-gke \
 * By default, Cloud Run on GKE uses example.com as the base domain, where the fully qualified domain name for a service is formatted as http://{route}.{namespace}.example.com. This default domain doesn't work "out of the box" as a URL you can send requests to.
 * you can go to this URL if the below doesn't work for you https://cloud.google.com/run/docs/gke/default-domain
 * The instructions show the use of free DNS wildcard sites so you don't have to purchase a custom domain for testing. 
-* When you are developing and testing, you change the default domain to use one of the free wildcard DNS test sites - such as
-- nip.io
-- xip.io
-- sslip.io
+* When you are developing and testing, you change the default domain to use one of the free wildcard DNS test sites - such as nip.io, xip.io, sslip.io
 * Get the external IP address
 ```
 kubectl get service istio-ingressgateway --namespace istio-system
