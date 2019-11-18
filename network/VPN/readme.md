@@ -26,7 +26,9 @@ gcloud compute networks subnets create cloud-east --network cloud \
     --range 10.0.1.0/24 --region us-east1
 ```
 * Create a VPC named on-prem
+```
 gcloud compute networks create on-prem --subnet-mode custom
+```
 
 * Enable ssh and icmp
 ```
@@ -168,7 +170,7 @@ iperf -c 192.168.1.2 -P 20 -x C
 
 * Choose the source VM and destination VM with the port 5001 and the UDP protocl - the test should work
 
-* When choosing port 80 and TCP protocol - the test will faile
+* When choosing port 80 and TCP protocol - the test will fail
 * To make it work, create a new FW 
 ```
 gcloud compute firewall-rules create on-prem-fw-80 --network on-prem --allow tcp:80
