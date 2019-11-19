@@ -3,12 +3,16 @@
 export PROJECT=amiteinav-sandbox
 gcloud config set project $PROJECT
 
-gcloud compute firewall-rules create vpc-demo-allow-http-rfc1918 \
---direction=INGRESS --priority=1000 --network=vpc-demo --action=ALLOW \
---rules=tcp:80,tcp:8000 --source-ranges=10.0.0.0/8,192.168.0.0/16
-gcloud compute firewall-rules create vpc-demo-allow-health-checks \
---direction=INGRESS --priority=1000 --network=vpc-demo --action=ALLOW \
---rules=tcp:80,tcp:8000 --source-ranges=130.211.0.0/22,35.191.0.0/16
+
+count=`gcloud compute firewall-rules list --filter vpc-demo-allow --format="(name,network,disabled)" | wc -l`
+if [ $count -ne 3 ] ; then
+    gcloud compute firewall-rules create vpc-demo-allow-http-rfc1918 \
+    --direction=INGRESS --priority=1000 --network=vpc-demo --action=ALLOW \
+    --rules=tcp:80,tcp:8000 --source-ranges=10.0.0.0/8,192.168.0.0/16 &
+    gcloud compute firewall-rules create vpc-demo-allow-health-checks \
+    --direction=INGRESS --priority=1000 --network=vpc-demo --action=ALLOW \
+    --rules=tcp:80,tcp:8000 --source-ranges=130.211.0.0/22,35.191.0.0/16 &
+fi
 
 gcloud container clusters get-credentials central-cluster \
 --zone us-central1-a
