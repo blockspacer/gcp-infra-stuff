@@ -19,4 +19,4 @@ pathMatchers:
         weight: 50
       - backendService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service-v2
         weight: 50
-  - priority: 1
+    priority: 1
