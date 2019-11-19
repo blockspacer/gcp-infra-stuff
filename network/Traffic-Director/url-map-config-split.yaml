@@ -1,0 +1,22 @@
+defaultService: https://www.googleapis.com/compute/v1/projects/amiteinav-sandbox/global/backendServices/td-gke-service
+kind: compute#urlMap
+name: td-gke-url-map
+selfLink: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/urlMaps/td-gke-url-map
+hostRules:
+- description: ''
+  hosts:
+  - '*'
+  pathMatcher: matcher1
+pathMatchers:
+- defaultService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service
+  name: matcher1
+  routeRules:
+  - matchRules:
+    - prefixMatch: ''
+    routeAction:
+      weightedBackendServices:
+      - backendService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service
+        weight: 50
+      - backendService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service-v2
+        weight: 50
+  - priority: 1
