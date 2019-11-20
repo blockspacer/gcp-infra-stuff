@@ -16,7 +16,7 @@ pathMatchers:
     routeAction:
       weightedBackendServices:
       - backendService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service
-        weight: 50
+        weight: 90
       - backendService: https://www.googleapis.com/compute/beta/projects/amiteinav-sandbox/global/backendServices/td-gke-service-v2
-        weight: 50
+        weight: 10
     priority: 1
