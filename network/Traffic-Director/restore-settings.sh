@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "make sure you source the file and not just execute it it"
+
 export PROJECT=amiteinav-sandbox
 gcloud config set project $PROJECT
 
