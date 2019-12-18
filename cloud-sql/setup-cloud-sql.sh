@@ -49,7 +49,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 gcloud compute instances list | grep ${MGMT_VM} >  /dev/null 2>&1
 if [ $? -ne 0 ] ; then
     echo "Creating instance"
-    gcloud beta compute --project=task-navigator instances create ${MGMT_VM} \
+    gcloud beta compute --project=$PROJECT_ID instances create ${MGMT_VM} \
     --zone=europe-west1-b --machine-type=n1-standard-1 --subnet=privatenet-europe-west1 \
     --no-address \
     --maintenance-policy=MIGRATE \
