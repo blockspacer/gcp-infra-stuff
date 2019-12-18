@@ -36,11 +36,14 @@ if [ $? -ne 0 ] ; then
     --source-ranges=35.235.240.0/20 --enable-logging    
 fi
 
+gcloud projects get-iam-policy ${PROJECT_ID} | grep -B1 -A1 "${EMAIL}" 
+
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 --member=user:${EMAIL} \
 --role=roles/iap.tunnelResourceAccessor
 
-gcloud compute instances list | grep ${MGMT_VM} >  /dev/null 2>&1
+#gcloud compute instances list | grep ${MGMT_VM} >  /dev/null 2>&1
+echo "skipping creation of mgmt instancex"
 if [ $? -ne 0 ] ; then
     echo "Creating instance"
     gcloud beta compute --project=$PROJECT_ID instances create ${MGMT_VM} \
@@ -61,7 +64,6 @@ fi
 gcloud services enable sqladmin.googleapis.com --project=${PROJECT_ID}
 gcloud services enable servicenetworking.googleapis.com --project=${PROJECT_ID}
 
-
 gcloud --project=${PROJECT_ID} beta sql instances list | grep ${INSTANCE_ID}  /dev/null 2>&1
 if [ $? -ne 0 ] ; then
     echo "Creating ${INSTANCE_ID} - should take 5 minutes"
@@ -72,5 +74,5 @@ if [ $? -ne 0 ] ; then
 fi
 
 pass=`openssl rand -base64 32 | head -c 16`
-echo $pass > ${INSTANCE_ID}_password.txt
-gcloud sql users set-password root --host % --instance $INSTANCE_ID  --password-file ${INSTANCE_ID}_password.txt
+echo $pass > ${PASSWD}
+gcloud sql users set-password root --host % --instance $INSTANCE_ID  --password $pass
