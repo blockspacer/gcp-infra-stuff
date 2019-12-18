@@ -33,7 +33,7 @@ else
 fi
 
 gcloud beta compute --project=${PROJECT_ID} firewall-rules list  \
- --filter=network:${VPC_NETWORK_NAME} | grep allow-iap-ssh > > /dev/null 2>&1
+ --filter=network:${VPC_NETWORK_NAME} | grep allow-iap-ssh  > /dev/null 2>&1
 
 if [ $? -ne 0 ] ; then
     gcloud beta compute --project=${PROJECT_ID} \
