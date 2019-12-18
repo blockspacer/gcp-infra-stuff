@@ -2,7 +2,7 @@
 
 export PROJECT_ID=task-navigator
 export REGION=europe-west1
-export INSTANCE_ID=task-navigator-mysql
+export INSTANCE_ID=task-navigator-mysql-1
 export VPC_NETWORK_NAME=privatenet
 export EU_WST=privatenet-europe-west1
 export EMAIL=amiteinav@google.com
@@ -48,6 +48,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 
 gcloud compute instances list | grep ${MGMT_VM} >  /dev/null 2>&1
 if [ $? -ne 0 ] ; then
+    echo "Creating instance"
     gcloud beta compute --project=task-navigator instances create ${MGMT_VM} \
     --zone=europe-west1-b --machine-type=n1-standard-1 --subnet=privatenet-europe-west1 \
     --no-address \
@@ -65,6 +66,7 @@ fi
 
 gcloud services enable sqladmin.googleapis.com --project=${PROJECT_ID}
 gcloud services enable servicenetworking.googleapis.com --project=${PROJECT_ID}
+
 
 gcloud --project=${PROJECT_ID} beta sql instances list | grep ${INSTANCE_ID}  /dev/null 2>&1
 if [ $? -ne 0 ] ; then
