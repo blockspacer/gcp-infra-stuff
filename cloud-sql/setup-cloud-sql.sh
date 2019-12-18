@@ -70,3 +70,9 @@ if [ $? -ne 0 ] ; then
         --region $REGION \
         --no-assign-ip
 fi
+
+
+pass=`openssl rand -base64 32 | head -c 16`
+echo $pass3 > ${INSTANCE_ID}_password.txt
+gcloud sql users set-password root --host % --instance $INSTANCE_ID \
+ --password $pass3
