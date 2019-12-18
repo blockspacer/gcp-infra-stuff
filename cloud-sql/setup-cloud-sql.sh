@@ -1,12 +1,6 @@
 #!/bin/bash
 
-export PROJECT_ID=amiteinav-sandbox
-export REGION=europe-west1
-export INSTANCE_ID=task-navigator-mysql-1
-export VPC_NETWORK_NAME=privatenet
-export EU_WST=privatenet-europe-west1
-export EMAIL=amiteinav@google.com
-export MGMT_VM=mgmt-instance-1
+source params.sh
 
 echo "Setting project to ${PROJECT_ID}"
 gcloud config set project ${PROJECT_ID}
@@ -53,7 +47,7 @@ if [ $? -ne 0 ] ; then
     --zone=europe-west1-b --machine-type=n1-standard-1 --subnet=privatenet-europe-west1 \
     --no-address \
     --maintenance-policy=MIGRATE \
-    --service-account=mgmt-instance-sa@task-navigator.iam.gserviceaccount.com \
+    --service-account=${SERVICE_ACCOUNT} \
     --scopes=https://www.googleapis.com/auth/cloud-platform \
     --image=debian-9-drawfork-v20191004 \
     --image-project=eip-images \
