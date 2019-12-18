@@ -71,8 +71,6 @@ if [ $? -ne 0 ] ; then
         --no-assign-ip
 fi
 
-
 pass=`openssl rand -base64 32 | head -c 16`
-echo $pass3 > ${INSTANCE_ID}_password.txt
-gcloud sql users set-password root --host % --instance $INSTANCE_ID \
- --password $pass3
+echo $pass > ${INSTANCE_ID}_password.txt
+gcloud sql users set-password root --host % --instance $INSTANCE_ID  --password-file ${INSTANCE_ID}_password.txt
