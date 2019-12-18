@@ -3,4 +3,4 @@
 source params.sh
 
 MYSQLIP=$(gcloud sql instances describe ${INSTANCE_ID} --format="value(ipAddresses.ipAddress)")
-mysql --host=$MYSQLIP --user=root --password-file $PASSWD  < db_construct.sql
+mysql --host=$MYSQLIP --user=root --password-file $PASSWD  < ../sql/db_construct.sql
