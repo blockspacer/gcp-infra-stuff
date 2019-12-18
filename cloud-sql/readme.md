@@ -10,7 +10,6 @@ cd data-science-on-gcp/03_sqlstudio
 * Setup environment variables
 ```
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
-export BUCKET=${PROJECT_ID}-ml
 export REGION=europe-west1
 export INSTANCE_ID=flights-private
 export VPC_NETWORK_NAME=privatenet
