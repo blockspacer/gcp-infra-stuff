@@ -1,16 +1,19 @@
-create database if not exists bts;
-use bts;
+CREATE DATABASE IF NOT EXISTS BTS;
+USE BTS;
 
-drop table if exists users;
+DROP TABLE IF EXISTS USERS;
 
-create table users (
-username varchar(32),
-first_name varchar(32),
-last_name varchar(32),
-email varchar(32),
-role_id integer,
-index (username),
-index (email),
-index (role_id)
+CREATE TABLE USERS (
+    USER_ID INT AUTO_INCREMENT PRIMARY KEY
+    USERNAME VARCHAR(32),
+    FIRST_NAME VARCHAR(32),
+    LAST_NAME VARCHAR(32),
+    EMAIL VARCHAR(45),
+    ROLE_ID INTEGER,
+    FOREIGN KEY(ROLE_ID) 
+    REFERENCES ROLES(ROLE_ID)
+    INDEX (USER_ID)
+    INDEX (USERNAME),
+    INDEX (EMAIL),
+    INDEX (ROLE_ID)
 )
-
