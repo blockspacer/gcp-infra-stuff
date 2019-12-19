@@ -1,4 +1,4 @@
-user_id,username,first_name,last_name,email,role_id
+userid,username,first_name,last_name,email,role_id
 ,salant,Asaf,Salant,Salant@google.com,1
 ,assafd,Assaf,Danesh,Danesh@google.com,1
 ,galavidan,Gal,Avidan,Avidan@google.com,1
