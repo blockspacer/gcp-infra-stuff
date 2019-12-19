@@ -2,7 +2,7 @@
 
 source params.sh
 
-pass=cat $PASSWD
+pass=`cat $PASSWD`
 
 MYSQLIP=$(gcloud sql instances describe ${INSTANCE_ID} --format="value(ipAddresses.ipAddress)")
 mysql --host=$MYSQLIP --user=root --password --verbose  < ../sql/db_construct.sql
