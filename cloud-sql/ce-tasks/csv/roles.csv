@@ -1,9 +1,9 @@
 role_name
-fsr.user
-fsr.mgr
-fsr.mgr.queue
-ce.user
-ce.mgr
-ce.mgr.queue
-ce.view.queue
-fsr.view.queue
+1,fsr.user
+2,fsr.mgr
+3,fsr.mgr.queue
+4,ce.user
+5,ce.mgr
+6,ce.mgr.queue
+7,ce.view.queue
+8,fsr.view.queue
