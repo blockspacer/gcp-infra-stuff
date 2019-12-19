@@ -1,0 +1,8 @@
+status_id	status_name
+,New
+,Accepted
+,Fixed
+,Obsolete
+,Infeasible
+,Duplicate
+,Closed
