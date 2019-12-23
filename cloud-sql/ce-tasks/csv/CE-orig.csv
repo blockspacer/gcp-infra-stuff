@@ -1,0 +1,85 @@
+,Opportunity details,,Customer Details,,,Task details,,,,,,,
+FSR ,SF Opportunity,Opportunity $,Customer,Customer Contacts,Customer Phone,CE Assigned,Task Type,11/03 12:29,Created,Description,FSR Comment,CE Comment,Changes Date
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000VxU0kQAF/view,12M/4y,Kaltura,zohar.babin@kaltura.com (zohar),,Avi Shitrit,Support,Completed,11/03 09:12,,reviewing our BOM offer,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900k/y,Checkpoint Corporation,ilavende@checkpoint.com (Itamar),,Israel Gofman,Support,Not started,11/03 09:16,GKE questions that delaying them from complete the deployment. who should I work with here?,help in answering questions of GKE deployment,"I had a conversation sync with Ido.
+We need to have a conversation with the customer to suggest a solution and provide the Timeline for this feature.",
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WYGHlQAP/view,1.5M/Y,SISENSE LTD,shimon.zeldner@sisense.com (shimon),,Israel Gofman,Presales,Completed,11/03 09:18,some changes in the Disks config is needed,evaluate which disks we need to place in our offer based on their specific use case,Waiting for FSR,Disks issue solved!
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZXKHQA5/view,960k/y,IRONSOURCE LTD,guy.barkan@ironsrc.com (guy),,Amit Einav,Presales,Completed,11/03 09:19,NLP call today/tomorrow (pre-POC),qualify the requirements for NLP,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZXKCQA5/view,500k/y,AMDOCS (ISRAEL) LTD.,Eran.Paran@amdocs.com,,Amit Einav,Presales,Completed,11/03 10:06,evaluating GCP ML pipeline for one of the main Amdocs products ,on the first meeting we had great match. moving to deeper qualification,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZXL0QAP/view,600k/y,Kaltura,zohar.babin@kaltura.com (zohar),,Avi Shitrit,Presales,In progress,11/03 11:24,customer wants to migrate his Speech to text services to GCP,we need to answer some qualification questions they have. call set to 7/11 at 14:00. some of the questions are in the email thread,,
+Jonatan Honig,https://vector.lightning.force.com/lightning/r/0064M00000WYGNoQAP/view,,ECI,,,Yaniv Weinberg,Presales,Waiting for customer,11/03 12:30,,"Meeting took place Nov 18th
+R&D budget allocated for Q1/2020, no concrete product/sales demand.
+Looking for partner to front this activity, Ifat recomended Skywiz or Purepeak
+Doron B from ECI decided to wait for January for budget allocation before moving forward with this task","Major concerns: 1. Moving from Swarm to k8s 2. Running Openstack within VM or moving into containers. Need management approval as they have been aquired by Ribbon.
+Current open task is training via bootcamp day, qwicklab credit and onsite training by partner. initial work should start early 2020. Customer is willing to move on with a partner , understading that during his discovery phase he will need to pay for partner consulting services.
+
+Update: Purepeak set initial kick off with customer for Nov. 28th. Waiting for customer to secure money budget for professional services 
+",2/12/2019
+Janina Lax,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZbbOQAT/view,"$480,000",,Yosef Yudilevich <yosef.yudilevich@pipl.com>,,,Presentation ,,11/05,"PIPL - #2 Knowledge Transfer // Study Jam
+
+","3 Key sessions
+
+
+1b) Big Data - Yaki - BQ, BI Engine, Dataprep, Dataflow & Dataproc - Overview of Big Data stack and how we are different
+scoping call by Yarkoni and build a session around that. 
+
+2) Frontend Kubernetes - Yuri & Alex - GKE vs Kubernetes vanilla on GCP & how it performance vs. AWS. 
+1-2
+
+3. Search - Arkady - Idea is to get an overview of Elastic on GCP and WHY Google can be the perfect support for PIPL's proprietary Search Engine. [Avi's idea was to put him in touch with former Search Appliance PM ? How can we get to him? - Bring the Elastic guys ",,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900000,"Check Point Software Technologies, Inc.",giladka@checkpoint.com,,Israel Gofman,Support,Not started,11/05 19:48,some support and workarounds needed for GCP services per region,it eliminates the customer to use some of our services,,
+Janina Lax,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZbbOQAT/view,,,Yosef Yudilevich <yosef.yudilevich@pipl.com>,,Israel Gofman,Presentation ,In progress,11/05 19:51,"PIPL - #2 Knowledge Transfer // Study Jam
+
+","
+2) Frontend Kubernetes - Yuri & Alex - GKE vs Kubernetes vanilla on GCP & how it performance vs. AWS. 
+1-2",,
+Janina Lax,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZbbOQAT/view,,,Yosef Yudilevich <yosef.yudilevich@pipl.com>,,Jonathan Yarkoni,Presentation ,,11/05 19:52,"PIPL - #2 Knowledge Transfer // Study Jam
+
+","1a) Data Science - Michael Lipshitz - Have a more detailed overview of Data Science Stack - Including Datalab, BQ ML, AI on GCP. ",,
+Roi Hermoni,,,Kaltura,,,Amit Einav,Presentation ,,11/11 10:38,,GCP Overview,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900000,Check Point Software Technologies,yardenya@checkpoint.com,,Israel Gofman,Support,Not started,11/12 12:00,design help in implementing our internal HTTP LB. its delaying production workload,we need to hold a call with the customer (Avi got also the description in email) and advise best possible solution for the situation.,"Its the same opportunity as in raw 4 ?? 
+I called the customer and no answer (Will try again later)",
+Eran Avshalom Ovsiovich,,,Zap Group,"amirn@d.co.il,
+zhakik@d.co.il
+",,Oren Loulay,First-Meeting,Started,11/17 14:02,Discovery meeting with ZAP new CTO (Amir) and Director of Infra (Zhaki),,https://docs.google.com/document/d/1FXvhZ4V0LulusNttPLwNKyxdxcxyrwMIVTPE8jSnh-E/edit?usp=sharing,
+Janina Lax,,,Pipl,"
+matan.keidar@pipl.com
+yaki.k@pipl.com
+",,Oren Loulay,Presentation ,In progress,11/17 14:05,Jarkoni presented Data platform overview to Pipl tech leads. Oren supported it as Data Specialist,,"They lack a lot of knowlegde around GCP Data platforms. The main focus for now should be to replace Cassandra with BigTable and consider BigTable, CloudSQL and BigQuery for other use cases they have. ",
+Shimrit Hedberg,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000VvXtXQAV/view,1.5M,MINIMOB PTE. LTD.,"d.siarros@minimob.com, a.stimec@minimob.com",306942694170,Yaniv Weinberg,Presales,Completed,11/21 09:31,,We are in final stages of closing commit deal with the customer and planning a visit with a CE to share roadmap and open new opportunities for growing the account in 2020.  ,"Deal closed. Customr had issues with batch loading into BQ and Network disconnects, will manage offline. ",
+Asaf Salant,,,MOON ACTIVE LTD,Haim.co@moonactive.com,,Israel Gofman,Support,Completed,11/19 09:08,"CE (Oren) recommended to upgrade GKE version and improve the GKE scale while expecting 10X grow in traffic during XMAS. As a result they were facing multiple issues that Israel was helping with (node pool configuration, NEG, upgrade procedure)",,"I had a HO meeting with Haim.
+I explained our NodeAutoProvisioning Solution.
+I showed it to him and he wiil use it (its in Beta stage)
+The customer also found a BUG and I will work with PG so solve it (No customer intervention needed) ",
+Jonatan Honig,,,Cellcom,Ronshv@cellcom.co.il ,,Amit Einav,Presales,In Research,11/21 12:00,"Had a discovery meeting on December 8th. 
+Hereby the main topics we have agreed to follow up on regarding GCP offering:
+1. Tech partnerships - Ready-to-sell packaged solutions
+2. Devops projects - one PO currently open for grasp
+3. CCAI - AI based Contact Center
+4. Data assets monetization - ML/AI for project specific scope",Need to have dedicated follow up sessions with the tech leads at Cellcom per each one of the workloads,,
+Shimrit Hedberg,,,"Donde Fashion, Inc.",omer@dondesearch.com ,,Uri Katsir,,Completed,11/26 14:35,,"Capacity Planning with Omer before Black Friday (Yaniv did the same with the customer last year, though there were no issues)",Shimrit verified this request with customer and everything looks on track. no additional action items.,26/11/19
+Daniel Levit,,,ETORO TRADING LTD,motigo@etoro.com ,,Yaniv Weinberg,Review,In progress,11/26 14:38,eToro Brainstorming for Multi cloud.,,4.12.19 worked with Israel and Yoni to collect data. we need to set a new time to present our solutions. ,
+Roi Hermoni,,,Kaltura,niv.shlomo@kaltura.com ,,Amit Einav,Presales,,11/27 12:11,kaltura wants to discuss some GCP services capabilities  before the migration,next week their Devops lead in abourd hence we need to have this this week,,
+Shimrit Hedberg,Customer is being created ,,Tanku.com,alonfa@tanku.com,,Uri Katsir,Presales,In progress,12/15 10:30,16/12/2019 - Meeting was informative. As next steps we provided the client with Vision API success rates and recommended using AutoML to improve accuracy. We also provided detailed information regarding using the RESt interface for StackDriver.,"The customer is interested in migrating his existing WL from Azure Containers to GKE. This is a new customer for us. Will attend: Alon Amstel - CTO (alon@tanku.com) and Nadav Maoz - VP R&D (nadav@tanku.com). The focus in the meeting shoiuld be GKE but i'd like the CE to dedicate few minutes in the end to get them hooked on ML APIs, I see potential for Video API. 
+Meeting date: December 10th, 14:00",,
+Shimrit Hedberg,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WaRKtQAN/view,250K as a start,Gigaspaces Technologies  Inc.,yoav.einav@gigaspaces.com,,Uri Katsir,Review,In progress,12/09 15:26,16/12/2019 - We had a good technical discussion mainly around Nod scaling and pricing options.,"[Yoav VP R&D] Two of our architects will join the meeting. As discussed the goal is lessons learn about SaaS and cost effectiveness of our architecture (multi tenant, scaling, sizing, etc.). [shimrit] They would like to meet on December 12th, preferable morning. ",,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,250k for Compute only,"Check Point Software Technologies, Inc.",nirha@checkpoint.com,,Israel Gofman,Support,Not started,12/09 15:24,customer needs to clarifiy some implementation topics of GCF ,we need to verify that there are no technical issues with them implemeting our GCF for their project,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,250k for Compute only,"Check Point Software Technologies, Inc.",nirha@checkpoint.com,,Oren Loulay,Support,Waiting for customer,12/12 11:34,customer needs to clarifiy some implementation topics of Bigquery,we need to verify that there are no technical issues ,"Oren: reached out to the customer asking for details. 
+There is a bug open and SRE addressed some of the customer's question, still in progress. May require some code changes on the customer side to differentiate between zipped / unzipped files (probably 2 separate load jobs) for more info see: https://issuetracker.google.com/146012761",
+Shimrit Hedberg,Existing Customer ,Spender ,Keywee,jacky@keywee.co,,Uri Katsir,Support,In progress,12/09 15:26,16/12/2019 - Keywee do not have a support plan nor do they have a partner. I opened a support case for this issue (#21553343). THe case was opend on 12/12/19.,"[Jacky, VP R&D] I need your assistance for a pilot we are trying to run.
+We are trying to train a model using TPU and keep getting error messages.
+Appreciate if we can talk",,
+Shimrit Hedberg,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WadGWQAZ/view,"300,000",AUDIOBURST LTD,Co Founder and CTO Gal Klein ,,Uri Katsir,Presales,Waiting for customer,12/09 15:26,"16/12/19 - On 3/12/19, Shimrit sent an email to the customer with follow up questions. No answer from the customer yet.",Heavy MS customer & partner we are in contact with for the past 2.5 years. This opportunity is for the customer data science team to use our TPUs to optimize the processing of their TF workloads. The purpose of the meeting to kick off the POC. ,,
+Ran Gat,,Discovery Meeting ,Altshuler Shaham,Oren Zenescu (CISO),,Israel Gofman,,,12/09 15:23,,Currently running on MS Azure for small work load (web site). looking to move major workload to the cloud during 2020. first meeting. customer also me with AWS and Azure. new to GCP. Traditional ENT    ,,
+Gal Avidan,TBD,"$300,000",INTSIGHTS CYBER INTELLIGENCE LTD,"Gal Ben Davis (CTO) , gal@intsights.com ",524593004,Israel Gofman,,,12/10 08:53,,"Intsights currently have a prod workload running on AWS and wish to migrate this to GCP (GKE if possible). Additionaly, The customer is looking to explore some 3rd party hw is currently using and see if he can migrate this also to GCP - one expample is Codefresh for CI. ",,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900k/y,"Check Point Software Technologies, Inc.",Naor Edri <naore@checkpoint.com>,050-6410099,Oren Loulay,Review,Completed,12/11 16:40,customer have issue (conceptual) with loading specific files type to BQ. its production env.,we need to call them and understand what they are trying to do and if its expected.,,
+Ran Gat,,200$K/Y,Adanite,Gilad Steinberg,050-540-4032,Yaniv Weinberg,First-Meeting,,12/11 19:29,,,Meeting set for 24/12,
+Ran Gat,,Biguery,Lumen.me,zachi@lumen.me,054-4935510,Yoni Daniel,First-Meeting,Completed,12/11 19:28,,,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000WZXL0QAP/view,part of the 12M,Kaltura,,,Amit Einav,Presales,Completed,12/11 19:24,customer have some design questions about the integration with OKTA,the meeting request is for 12/12 at 14:00,,
+Hagit Cohen,,,APPSFLYER LTD,,,Yoni Daniel,Presentation ,Completed,12/15 11:14,GCP Big Data Tools presentation,,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900k/y,"Check Point Software Technologies, Inc.",shayl@checkpoint.com,,,Support,,15/12 12:11,help in nested virtualization planning,customer got notification from us about change and he would like to understand his options.,,
+Assaf Danesh,GKE On Premm,GKE,MIGDAL INSURANCE CO. LTD.,yumanv@migdal.co.il,054-6878711,,First-Meeting,,,,First Meeting with Devopps Manager Regarding Kubernetes,,
+Daniel Levit,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000VxlBLQAZ/view,1600k$,Fornova,Dima,,,Review,Completed,,,,,
+Roi Hermoni,https://vector.lightning.force.com/lightning/r/Opportunity/0064M00000Tkw51QAB/view,900k/y,"Check Point Software Technologies, Inc.","noab@checkpoint.com, naore@checkpoint.com",,,Presales,Not started,19/12 12:07,design help in on boarding new workload to GCP (DNS security),,,
+Assaf Danesh,,,isracard,ylupo@isracard.co.il,052-4702567,,Presales,Not started,22/12 ,,first meeting with Dev team regarding new site the customer develop,,
+Roi Hermoni,,,,,,,,,,,,,
