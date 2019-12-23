@@ -30,8 +30,9 @@ def main(argv,script):
         sys.exit(2)
 
     with open(inputfile, newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
-        for row in spamreader:
+        filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+        next(filereader, None)  # skip the headers
+        for row in filereader:
             print(row[0])
             print ('\n')
 
