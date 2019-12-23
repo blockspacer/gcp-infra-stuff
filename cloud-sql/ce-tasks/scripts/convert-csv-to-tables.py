@@ -14,7 +14,7 @@ def get_user_name(name,userscsv):
                 if ( name == full_name  ):
                     return row[1]
 
-def get_status_code(status,csv):
+def get_status_code(status,statuscsv):
     with open(statuscsv, newline='') as csvfile:
             filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             next(filereader, None)  # skip the 1st line
