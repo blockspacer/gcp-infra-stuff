@@ -5,6 +5,16 @@ from io import open
 import sys, getopt
 import csv
 
+def get_user_name(name):
+
+    with open('../csv/USERS.csv', newline='') as csvfile:
+            filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            next(filereader, None)  # skip the 1st line
+            for row in filereader:
+                full_name = row[2] + ' ' + row[3]
+                if ( name == full_name  ):
+                    return row[1]
+
 def main(argv,script):
     inputfile = ''
     outputfile = ''
@@ -34,13 +44,15 @@ def main(argv,script):
         csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csv_writer.writeheader()
 
-
         with open(inputfile, newline='') as csvfile:
             filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             next(filereader, None)  # skip the 1st line
             next(filereader, None)  # skip the 2nd line
             for row in filereader:
+                
+                line = {}
                 skip_row = False
+                
                 fsr=row[0]
                 sfopp=row[1]
                 oppvalue=row[2]	
@@ -60,15 +72,10 @@ def main(argv,script):
                     skip_row = True
 
                 if (not skip_row ):
-                    print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
+                    line['REQUEST_INFORMATION'] = description
+                    line['REQUESTOR_ID'] = get_user_name(fsr)
 
-                line = {}
-                line['REQUEST_ID'] = 0
-                line['REQUEST_INFORMATION'] = 'adsfsdfsdfs sdfsdfd'
-
-                csv_writer.writerow(line)
-
-               
+                    csv_writer.writerow(line)
 
 if __name__ == "__main__":
    main(sys.argv[1:],sys.argv[0])
