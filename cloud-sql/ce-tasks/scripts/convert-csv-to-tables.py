@@ -32,7 +32,7 @@ def main(argv,script):
     with open(outputfile, 'w', newline='') as csvfile:
         fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE']
         csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    	csv_writer.writeheader()
+        csv_writer.writeheader()
 
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
