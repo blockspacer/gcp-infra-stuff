@@ -30,10 +30,10 @@ def main(argv,script):
         sys.exit(2)
 
     with open(inputfile, newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
         for row in spamreader:
             print(row)
-            print ('n')
+            print ('\n')
 
     exit()
 
