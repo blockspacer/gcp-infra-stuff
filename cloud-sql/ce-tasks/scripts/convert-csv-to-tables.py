@@ -18,8 +18,15 @@ def main(argv,script):
             sys.exit()
         elif opt in ("-i", "--ifile"):
             inputfile = arg
+            if (not path.exists(inputfile)):
+                print ('file ' + inputfile + 'does not exist')
+                sys.exit(2)
         elif opt in ("-o", "--ofile"):
             outputfile = arg
+            if (not path.exists(outputfile)):
+                print ('file ' + outputfile + 'does not exist')
+                sys.exit(2)
+            
 
     if (inputfile == ''):
         print (script + ' -i <inputfile> -o <outputfile>')
