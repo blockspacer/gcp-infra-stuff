@@ -49,7 +49,7 @@ def main(argv,script):
             fsr_comment=row[11]
             ce_comment=row[12]
             change_date=row[13]
-            print ('Checking if mandatory fields exist\n')
+            # Checking if mandatory fields exist
             if ( fsr == '' or sfopp == ''):
                 skip_row = True
 
