@@ -21,6 +21,10 @@ def main(argv,script):
         elif opt in ("-o", "--ofile"):
             outputfile = arg
 
+    if (inputfile == ''):
+        print (script + ' -i <inputfile> -o <outputfile>')
+        sys.exit(2)
+    
     print ('Input file is "', inputfile)
     print ('Output file is "', outputfile)
 
