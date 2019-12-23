@@ -32,6 +32,7 @@ def main(argv,script):
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
         next(filereader, None)  # skip the headers
+        next(filereader, None)  # skip the headers
         for row in filereader:
             print(row[0])
             print ('\n')
