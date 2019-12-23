@@ -34,7 +34,7 @@ def main(argv,script):
     #filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
     filewriter = csv.DictWriter(outcsvfile,fieldnames=fieldnames)
 
-    filewriter.writeheader()
+    #filewriter.writeheader()
 
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
