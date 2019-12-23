@@ -31,11 +31,24 @@ def main(argv,script):
 
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
-        next(filereader, None)  # skip the headers
-        next(filereader, None)  # skip the headers
+        next(filereader, None)  # skip the 1st line
+        next(filereader, None)  # skip the 2nd line
         for row in filereader:
-            print(row[0])
-            print ('\n')
+            fsr=row[0]
+            sfopp=row[1]
+            oppvalue=row[2]	
+            customer=row[3]	
+            customer_contacts=row[4]
+            customer_phone=row[5]
+            ce_assigned=row[6]
+            task_type=row[7]
+            status=row[8]
+            created=row[9]
+            description=row[10]
+            fsr_comment=row[11]
+            ce_comment=row[12]
+            change_date=row[13]
+            print ('fsr: '+ fsr + 'sfopp: ' + sfopp)
 
     exit()
 
