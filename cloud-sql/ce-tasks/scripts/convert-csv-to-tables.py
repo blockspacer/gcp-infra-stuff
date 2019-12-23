@@ -22,7 +22,6 @@ def get_status_code(status):
                 if ( status == row[1]):
                     return row[0]
 
-
 def main(argv,script):
     inputfile = ''
     outputfile = ''
@@ -47,47 +46,46 @@ def main(argv,script):
         print (script + ' -i <inputfile> -o <outputfile>')
         sys.exit(2)
 
-    with open(outputfile, 'w', newline='') as csvfile:
-        fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE']
-        csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    with open(outputfile, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile:
+        fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE','DEAL_YEARS','OPP_SIZE']
+        csv_writer = csv.DictWriter(csvfileout, fieldnames=fieldnames)
         csv_writer.writeheader()
-
-        with open(inputfile, newline='') as csvfile:
-            filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            next(filereader, None)  # skip the 1st line
-            next(filereader, None)  # skip the 2nd line
-            for row in filereader:
+        
+        filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        next(filereader, None)  # skip the 1st line
+        next(filereader, None)  # skip the 2nd line
+        for row in filereader:
                 
-                line = {}
-                skip_row = False
+            line = {}
+            skip_row = False
                 
-                fsr=row[0]
-                sfopp=row[1]
-                oppvalue=row[2]	
-                customer=row[3]	
-                customer_contacts=row[4]
-                customer_phone=row[5]
-                ce_assigned=row[6]
-                task_type=row[7]
-                status=row[8]
-                created=row[9]
-                description=row[10]
-                fsr_comment=row[11]
-                ce_comment=row[12]
-                change_date=row[13]
-                # Checking if mandatory fields exist
-                if ( fsr == '' or sfopp == ''):
-                    skip_row = True
+            fsr=row[0]
+            sfopp=row[1]
+            oppvalue=row[2]	
+            customer=row[3]	
+            customer_contacts=row[4]
+            customer_phone=row[5]
+            ce_assigned=row[6]
+            task_type=row[7]
+            status=row[8]
+            created=row[9]
+            description=row[10]
+            fsr_comment=row[11]
+            ce_comment=row[12]
+            change_date=row[13]
+            # Checking if mandatory fields exist
+            if ( fsr == '' or sfopp == ''):
+                skip_row = True
 
-                if (not skip_row ):
-                    line['REQUEST_INFORMATION'] = description
-                    line['REQUESTOR_ID'] = get_user_name(fsr)
-                    line['REQUEST_OWNER'] = get_user_name(ce_assigned)
-                    line['STATUS_ID'] = get_status_code(status)
-                    line['CUSTOMER_ID'] = customer
-                    line['OPP_ID'] = sfopp
-                    line['CREATED'] = created
-                    csv_writer.writerow(line)
+            if (not skip_row ):
+                line['REQUEST_INFORMATION'] = description
+                line['REQUESTOR_ID'] = get_user_name(fsr)
+                line['REQUEST_OWNER'] = get_user_name(ce_assigned)
+                line['STATUS_ID'] = get_status_code(status)
+                line['CUSTOMER_ID'] = customer
+                line['OPP_ID'] = sfopp
+                line['CREATED'] = created
+                csv_writer.writerow(line)
 
 if __name__ == "__main__":
    main(sys.argv[1:],sys.argv[0])
