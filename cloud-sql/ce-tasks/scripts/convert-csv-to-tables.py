@@ -22,6 +22,15 @@ def get_status_code(status,statuscsv):
                 if ( status == row[1]):
                     return row[0]
 
+def get_customer_id(customer_name,customercsv):
+    with open(statuscsv, newline='') as csvfile:
+            filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            next(filereader, None)  # skip the 1st line
+            for row in filereader:
+                if ( customer_name == row[1]):
+                    return row[0]
+            return 0
+
 def main(argv,script):
 
     userscsv='../csv/USERS.csv'
@@ -101,7 +110,7 @@ def main(argv,script):
                 reqline['CREATED'] = created
                 csv_writer.writerow(reqline)
             
-            if (customer != '' ):
+            if (customer != '' and get_customer_id(customer,customercsv) != 0):
                 custline['CUSTOMER_ID'] = cust_index
                 custline['CUSTOMER_DESCRIPTION'] = customer
                 cust_index = cust_index + 1
