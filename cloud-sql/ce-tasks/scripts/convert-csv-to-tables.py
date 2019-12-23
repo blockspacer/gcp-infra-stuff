@@ -30,7 +30,10 @@ def main(argv,script):
         sys.exit(2)
 
     outcsvfile = open(outputfile,'w') 
-    filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE']
+    filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
+
+    filewriter.writeheader()
 
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -59,8 +62,7 @@ def main(argv,script):
             if (not skip_row ):
                 print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
 
-        row2write = '[' + '\'' + fsr + '\'' + ',' + '\'' + sfopp + '\'' + ']'
-        filewriter.writerow(row2write)
+               
 
 if __name__ == "__main__":
    main(sys.argv[1:],sys.argv[0])
