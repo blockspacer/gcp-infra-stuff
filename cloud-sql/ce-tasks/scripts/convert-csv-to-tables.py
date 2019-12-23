@@ -29,6 +29,9 @@ def main(argv,script):
         print (script + ' -i <inputfile> -o <outputfile>')
         sys.exit(2)
 
+    open(outputfile,'w') as outcsvfile
+    filewriter = csv.writer(outcsvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
         next(filereader, None)  # skip the 1st line
@@ -55,6 +58,9 @@ def main(argv,script):
 
             if (not skip_row ):
                 print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
+
+            filewriter.writerow([fsr],[task_type])
+
 
     exit()
 
