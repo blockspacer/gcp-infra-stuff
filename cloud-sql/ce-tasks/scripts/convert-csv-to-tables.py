@@ -59,7 +59,7 @@ def main(argv,script):
             if (not skip_row ):
                 print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
 
-        row2write = '[' + '\'' + fsr + + '\'' + ',' + '\'' + sfopp + '\'' + ']'
+        row2write = '[' + '\'' + fsr + '\'' + ',' + '\'' + sfopp + '\'' + ']'
         filewriter.writerow(row2write)
 
 if __name__ == "__main__":
