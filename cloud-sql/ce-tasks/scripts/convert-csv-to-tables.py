@@ -34,6 +34,7 @@ def main(argv,script):
         csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csv_writer.writeheader()
 
+
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         next(filereader, None)  # skip the 1st line
@@ -60,6 +61,12 @@ def main(argv,script):
 
             if (not skip_row ):
                 print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
+
+            line = {}
+            line['REQUEST_ID'] = 0
+            line['REQUEST_INFORMATION'] = 'adsfsdfsdfs sdfsdfd'
+
+            csv_writer.writerow(line)
 
                
 
