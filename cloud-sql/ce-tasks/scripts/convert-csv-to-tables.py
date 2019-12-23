@@ -23,7 +23,7 @@ def get_status_code(status,statuscsv):
                     return row[0]
 
 def get_customer_id(customer_name,customercsv):
-    with open(statuscsv, newline='') as csvfile:
+    with open(customercsv, newline='') as csvfile:
             filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             next(filereader, None)  # skip the 1st line
             for row in filereader:
