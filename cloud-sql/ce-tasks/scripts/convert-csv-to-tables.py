@@ -34,6 +34,7 @@ def main(argv,script):
         next(filereader, None)  # skip the 1st line
         next(filereader, None)  # skip the 2nd line
         for row in filereader:
+            skip_row = False
             fsr=row[0]
             sfopp=row[1]
             oppvalue=row[2]	
@@ -48,7 +49,12 @@ def main(argv,script):
             fsr_comment=row[11]
             ce_comment=row[12]
             change_date=row[13]
-            print ('fsr: '+ fsr + ' sfopp: ' + sfopp)
+            print ('Checking if mandatory fields exist\n')
+            if ( fsr == '' or sfopp == ''):
+                skip_row = True
+
+            if (not skip_row ):
+                print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
 
     exit()
 
