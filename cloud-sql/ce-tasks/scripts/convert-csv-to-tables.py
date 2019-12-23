@@ -3,6 +3,7 @@
 from os import path
 from io import open
 import sys, getopt
+import csv
 
 def main(argv,script):
     inputfile = ''
@@ -23,11 +24,17 @@ def main(argv,script):
                 sys.exit(2)
         elif opt in ("-o", "--ofile"):
             outputfile = arg
-            
 
     if (inputfile == ''):
         print (script + ' -i <inputfile> -o <outputfile>')
         sys.exit(2)
+
+    with open(inputfile, newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in spamreader:
+            print(row)
+
+    exit()
 
     file = open(inputfile,'r')
     for i in file.readlines():
