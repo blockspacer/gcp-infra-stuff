@@ -32,7 +32,7 @@ def main(argv,script):
     with open(inputfile, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
         for row in spamreader:
-            print(row)
+            print(row[0])
             print ('\n')
 
     exit()
