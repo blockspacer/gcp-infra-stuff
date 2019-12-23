@@ -31,7 +31,8 @@ def main(argv,script):
 
     outcsvfile = open(outputfile,'w') 
     fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE']
-    filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
+    #filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
+    filewriter = csv.DictWriter(outcsvfile,fieldnames=fieldnames)
 
     filewriter.writeheader()
 
