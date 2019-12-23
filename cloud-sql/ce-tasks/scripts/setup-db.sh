@@ -7,6 +7,7 @@ gsutil -m cp gs://task-navigator-files/csv/* ../csv/
 CE_TASK_TSV=../csv/CE-tasks.tsv
 ls ${CE_TASK_TSV} > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
+    echo "populating information"
     python3 convert-csv-to-tables.py  -i ${CE_TASK_TSV}
 fi
 
