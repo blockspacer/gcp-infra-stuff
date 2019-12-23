@@ -48,7 +48,7 @@ def main(argv,script):
             fsr_comment=row[11]
             ce_comment=row[12]
             change_date=row[13]
-            print ('fsr: '+ fsr + 'sfopp: ' + sfopp)
+            print ('fsr: '+ fsr + ' sfopp: ' + sfopp)
 
     exit()
 
