@@ -29,7 +29,7 @@ def main(argv,script):
         print (script + ' -i <inputfile> -o <outputfile>')
         sys.exit(2)
 
-    open(outputfile,'w') as outcsvfile
+    outcsvfile = open(outputfile,'w') 
     filewriter = csv.writer(outcsvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
     with open(inputfile, newline='') as csvfile:
