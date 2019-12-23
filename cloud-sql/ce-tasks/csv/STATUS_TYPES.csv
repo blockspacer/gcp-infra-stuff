@@ -1,8 +1,15 @@
 status_id	status_name
-,New
-,Accepted
-,Fixed
-,Obsolete
-,Infeasible
-,Duplicate
-,Closed
+1,New
+2,Accepted
+3,Fixed
+4,Obsolete
+5,Infeasible
+6,Duplicate
+7,Closed
+8,Not started
+9,In progress
+10,Completed
+11,Waiting for customer
+12,Waiting for FSR
+13,In Research
+14,Started
