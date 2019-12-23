@@ -33,7 +33,7 @@ def main(argv,script):
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in spamreader:
             print(row)
-            print 'n'
+            print ('n')
 
     exit()
 
