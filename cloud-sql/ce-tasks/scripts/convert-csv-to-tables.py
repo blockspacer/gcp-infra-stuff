@@ -30,7 +30,7 @@ def main(argv,script):
         sys.exit(2)
 
     outcsvfile = open(outputfile,'w') 
-    filewriter = csv.writer(outcsvfile, delimiter=',',quotechar='|', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    filewriter = csv.writer(outcsvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     with open(inputfile, newline='') as csvfile:
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
