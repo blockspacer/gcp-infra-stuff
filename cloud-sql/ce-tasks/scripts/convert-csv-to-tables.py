@@ -30,10 +30,10 @@ def main(argv,script):
         sys.exit(2)
 
     outcsvfile = open(outputfile,'w') 
-    filewriter = csv.writer(outcsvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    filewriter = csv.writer(outcsvfile, delimiter=',',quotechar='|', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     with open(inputfile, newline='') as csvfile:
-        filereader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+        filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         next(filereader, None)  # skip the 1st line
         next(filereader, None)  # skip the 2nd line
         for row in filereader:
@@ -59,14 +59,8 @@ def main(argv,script):
             if (not skip_row ):
                 print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
 
-            filewriter.writerow([fsr],[task_type])
-
-
-    exit()
-
-    file = open(inputfile,'r')
-    for i in file.readlines():
-        print (i + '\n')
+        row2write = '[' + '\'' fsr + + '\'' + ',' + '\'' + sfopp + + '\'' + ']'
+        filewriter.writerow(row2write)
 
 if __name__ == "__main__":
    main(sys.argv[1:],sys.argv[0])
