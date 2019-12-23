@@ -19,21 +19,15 @@ def main(argv,script):
         elif opt in ("-i", "--ifile"):
             inputfile = arg
             if (not path.exists(inputfile)):
-                print ('file ' + inputfile + 'does not exist')
+                print ('file ' + inputfile + ' does not exist')
                 sys.exit(2)
         elif opt in ("-o", "--ofile"):
             outputfile = arg
-            if (not path.exists(outputfile)):
-                print ('file ' + outputfile + 'does not exist')
-                sys.exit(2)
             
 
     if (inputfile == ''):
         print (script + ' -i <inputfile> -o <outputfile>')
         sys.exit(2)
-    
-    print ('Input file is "', inputfile)
-    print ('Output file is "', outputfile)
 
     file = open(inputfile,'r')
     for i in file.readlines():
