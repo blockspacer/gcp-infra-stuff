@@ -19,7 +19,7 @@ def get_status_code(status):
             filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             next(filereader, None)  # skip the 1st line
             for row in filereader:
-                if ( name == row[1]):
+                if ( status == row[1]):
                     return row[0]
 
 
