@@ -35,38 +35,38 @@ def main(argv,script):
         csv_writer.writeheader()
 
 
-    with open(inputfile, newline='') as csvfile:
-        filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        next(filereader, None)  # skip the 1st line
-        next(filereader, None)  # skip the 2nd line
-        for row in filereader:
-            skip_row = False
-            fsr=row[0]
-            sfopp=row[1]
-            oppvalue=row[2]	
-            customer=row[3]	
-            customer_contacts=row[4]
-            customer_phone=row[5]
-            ce_assigned=row[6]
-            task_type=row[7]
-            status=row[8]
-            created=row[9]
-            description=row[10]
-            fsr_comment=row[11]
-            ce_comment=row[12]
-            change_date=row[13]
-            # Checking if mandatory fields exist
-            if ( fsr == '' or sfopp == ''):
-                skip_row = True
+        with open(inputfile, newline='') as csvfile:
+            filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            next(filereader, None)  # skip the 1st line
+            next(filereader, None)  # skip the 2nd line
+            for row in filereader:
+                skip_row = False
+                fsr=row[0]
+                sfopp=row[1]
+                oppvalue=row[2]	
+                customer=row[3]	
+                customer_contacts=row[4]
+                customer_phone=row[5]
+                ce_assigned=row[6]
+                task_type=row[7]
+                status=row[8]
+                created=row[9]
+                description=row[10]
+                fsr_comment=row[11]
+                ce_comment=row[12]
+                change_date=row[13]
+                # Checking if mandatory fields exist
+                if ( fsr == '' or sfopp == ''):
+                    skip_row = True
 
-            if (not skip_row ):
-                print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
+                if (not skip_row ):
+                    print ('FSR: '+ fsr + ' Salesforce Opp: ' + sfopp)
 
-            line = {}
-            line['REQUEST_ID'] = 0
-            line['REQUEST_INFORMATION'] = 'adsfsdfsdfs sdfsdfd'
+                line = {}
+                line['REQUEST_ID'] = 0
+                line['REQUEST_INFORMATION'] = 'adsfsdfsdfs sdfsdfd'
 
-            csv_writer.writerow(line)
+                csv_writer.writerow(line)
 
                
 
