@@ -135,12 +135,15 @@ def main(argv,script):
             
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
                 print ('customer id: ' + str(get_customer_id(customer,customerscsv)) + ' customer: ' + customer)
-                with open (customerscsv,'w',newline='') as custcsvfileout:
+                with open (customerscsv,'a+',newline='') as custcsvfileout:
                     cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
                     custline['CUSTOMER_ID'] = cust_index
                     custline['CUSTOMER_DESCRIPTION'] = customer
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
+            
+            import os
+            os.system('cat ../csv/CUSTOMERS.csv')
 
 
 if __name__ == "__main__":
