@@ -64,7 +64,7 @@ fi
 gcloud services enable sqladmin.googleapis.com --project=${PROJECT_ID}
 gcloud services enable servicenetworking.googleapis.com --project=${PROJECT_ID}
 
-gcloud --project=${PROJECT_ID} beta sql instances list | grep ${INSTANCE_ID}  /dev/null 2>&1
+gcloud --project=${PROJECT_ID} beta sql instances list | grep ${INSTANCE_ID}  > /dev/null 2>&1
 if [ $? -ne 0 ] ; then
     echo "Creating ${INSTANCE_ID} - should take 5 minutes"
     time gcloud --project=${PROJECT_ID} beta sql instances create ${INSTANCE_ID} \
