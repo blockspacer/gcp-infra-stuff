@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 source params.sh
 
 gsutil -m cp gs://task-navigator-files/csv/* ../csv/
