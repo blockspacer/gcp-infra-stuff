@@ -20,6 +20,6 @@ mysqlimport --local --host=$MYSQLIP --user=root \
 BTS \
 ../csv/*.csv
 
-#../csv/ROLES.csv ../csv/USERS.csv ../csv/STATUS_TYPES.csv ../csv/TASK_TYPES.csv
+bash query-db.sh
 
 
