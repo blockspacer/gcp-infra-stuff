@@ -122,18 +122,6 @@ def main(argv,script):
             if ( fsr == '' or sfopp == ''):
                 skip_row = True
 
-            if (not skip_row ):
-                reqline['REQUEST_INFORMATION'] = description
-                reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
-                reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
-                reqline['STATUS_ID'] = get_status_code(status,statuscsv)
-                reqline['CUSTOMER_ID'] = customer
-                reqline['OPP_ID'] = sfopp
-                reqline['CREATED'] = created
-                csv_writer.writerow(reqline)
-                print(reqline)
-            
-            
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
                 with open (customerscsv,'a+',newline='') as custcsvfileout:
                     cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
@@ -141,6 +129,21 @@ def main(argv,script):
                     custline['CUSTOMER_DESCRIPTION'] = customer
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
+
+            if (not skip_row ):
+                reqline['REQUEST_INFORMATION'] = description
+                reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
+                reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
+                reqline['STATUS_ID'] = get_status_code(status,statuscsv)
+                reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
+                reqline['OPP_ID'] = sfopp
+                reqline['CREATED'] = created
+                reqline['OPP_SIZE'] = oppvalue
+                csv_writer.writerow(reqline)
+                print(reqline)
+            
+            
+            
             
             #import os
             #os.system('cat ../csv/CUSTOMERS.csv')
