@@ -110,7 +110,7 @@ def main(argv,script):
                 reqline['CREATED'] = created
                 csv_writer.writerow(reqline)
             
-            #print ('customer id: ' + get_customer_id(customer,customerscsv) + 'customer: ' + customer)
+            print ('customer id: ' + str(get_customer_id(customer,customerscsv)) + ' customer: ' + customer)
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
                 custline['CUSTOMER_ID'] = cust_index
                 custline['CUSTOMER_DESCRIPTION'] = customer
