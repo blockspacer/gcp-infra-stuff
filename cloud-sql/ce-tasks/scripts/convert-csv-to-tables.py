@@ -80,9 +80,6 @@ def main(argv,script):
         print (script + ' -i <inputfile>')
         sys.exit(2)
 
-    lista = create_customer_dictionary(inputfile)
-    print (lista)
-
     with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile:
         
         # setting up the requests output file
@@ -135,8 +132,9 @@ def main(argv,script):
                 reqline['CREATED'] = created
                 csv_writer.writerow(reqline)
             
-            print ('customer id: ' + str(get_customer_id(customer,customerscsv)) + ' customer: ' + customer)
+            
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
+                print ('customer id: ' + str(get_customer_id(customer,customerscsv)) + ' customer: ' + customer)
                 with open (customerscsv,'w',newline='') as custcsvfileout:
                     cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
                     custline['CUSTOMER_ID'] = cust_index
