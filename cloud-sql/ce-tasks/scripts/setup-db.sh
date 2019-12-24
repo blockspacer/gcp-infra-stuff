@@ -23,12 +23,16 @@ mysql --host=$MYSQLIP --user=root --password=$pass bts  < ${SQLDIR}/db_construct
 #mysql <options> -e "LOAD DATA LOCAL INFILE 'foo' INTO TABLE bar; SHOW WARNINGS"
 
 tables="ROLES STATUS_TYPES TASK_TYPES CE_SKILLS QUEUES CUSTOMERS USERS TASKS TASK_OWNERS REQUESTS TASK_DETAILS_UPDATE" 
-
 for table in $tables ; do
-    mysqlimport --local --host=$MYSQLIP --user=root \
-    --ignore-lines=1 --password=$pass --fields-terminated-by=',' \
-    BTS ${CSVDIR}/${table}.csv
+    mysql --execute="LOAD DATA LOCAL INFILE '$CSVDIR/${table}.csv' INTO TABLE ${table} FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES (listOfColumnNames); SHOW WARNINGS"
 done
+
+
+#for table in $tables ; do
+#    mysqlimport --local --host=$MYSQLIP --user=root \
+#    --ignore-lines=1 --password=$pass --fields-terminated-by=',' \
+#    BTS ${CSVDIR}/${table}.csv
+#done
 
 bash query-db.sh
 
