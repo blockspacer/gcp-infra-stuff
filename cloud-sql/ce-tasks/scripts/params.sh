@@ -9,4 +9,6 @@ export EMAIL=amiteinav@google.com
 export MGMT_VM=mgmt-instance-1
 export SERVICE_ACCOUNT=mgmt-instance-sa@task-navigator.iam.gserviceaccount.com
 export PASSWD=${INSTANCE_ID}_password.txt
+export CSVDIR=../csv/
+export SQLDIR=../sql/
 
