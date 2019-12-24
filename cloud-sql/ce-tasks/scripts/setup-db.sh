@@ -21,8 +21,9 @@ mysql --host=$MYSQLIP --user=root --password=$pass bts  < ../sql/db_construct.sq
 mysqlimport --local --host=$MYSQLIP --user=root \
 --ignore-lines=1 --password=$pass --fields-terminated-by=',' \
 BTS \
-#../csv/*.csv
 ../csv/REQUESTS.csv
+#../csv/*.csv
+
 
 bash query-db.sh
 
