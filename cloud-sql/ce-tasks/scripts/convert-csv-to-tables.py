@@ -83,7 +83,7 @@ def main(argv,script):
     lista = create_customer_dictionary(inputfile)
     print (lista)
 
-    with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile, open (customerscsv,'w',newline='') as custcsvfileout:
+    with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile:
         
         # setting up the requests output file
         request_fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE','DEAL_YEARS','OPP_SIZE']
@@ -91,10 +91,11 @@ def main(argv,script):
         csv_writer.writeheader()
 
         # setting up the customers output file
-        customers_fieldnames = ['CUSTOMER_ID','CUSTOMER_DESCRIPTION']
-        cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
-        cust_csv_writer.writeheader()
-        cust_index = 0
+        with open (customerscsv,'w',newline='') as custcsvfileout:
+            customers_fieldnames = ['CUSTOMER_ID','CUSTOMER_DESCRIPTION']
+            cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
+            cust_csv_writer.writeheader()
+            cust_index = 0
         
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         next(filereader, None)  # skip the 1st line
@@ -136,10 +137,12 @@ def main(argv,script):
             
             print ('customer id: ' + str(get_customer_id(customer,customerscsv)) + ' customer: ' + customer)
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
-                custline['CUSTOMER_ID'] = cust_index
-                custline['CUSTOMER_DESCRIPTION'] = customer
-                cust_index = cust_index + 1
-                cust_csv_writer.writerow(custline)
+                with open (customerscsv,'w',newline='') as custcsvfileout:
+                    cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
+                    custline['CUSTOMER_ID'] = cust_index
+                    custline['CUSTOMER_DESCRIPTION'] = customer
+                    cust_index = cust_index + 1
+                    cust_csv_writer.writerow(custline)
 
 
 if __name__ == "__main__":
