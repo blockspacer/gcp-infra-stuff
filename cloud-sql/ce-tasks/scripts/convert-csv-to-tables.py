@@ -42,8 +42,7 @@ def create_customer_dictionary(inputfile):
 
         for row in filereader:
             customer=row[3]
-            if ( customer != '' and (customer not in list_dicts)):
-
+            if ( (customer != '') and (customer not in list_dicts)):
                 dict_tmp={}
                 dict_tmp['CUSTOMER_ID'] = index
                 dict_tmp['CUSTOMER_DESCRIPTION'] = customer
