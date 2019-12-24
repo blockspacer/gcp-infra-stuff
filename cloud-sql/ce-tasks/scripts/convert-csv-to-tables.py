@@ -131,6 +131,7 @@ def main(argv,script):
                 reqline['OPP_ID'] = sfopp
                 reqline['CREATED'] = created
                 csv_writer.writerow(reqline)
+                print(reqline)
             
             
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
