@@ -31,6 +31,28 @@ def get_customer_id(customer_name,customercsv):
                     return row[0]
             return 0
 
+def create_customer_dictionary(inputfile):
+    list_dicts = []
+        with open(inputfile, newline='') as csvfile:
+            filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            next(filereader, None)  # skip the 1st line
+            next(filereader, None)  # skip the 2nd line
+
+            index = 1
+
+            for row in filereader:
+                customer=row[3]
+                if ( customer != ''):
+                    dict_tmp={}
+                    dict_tmp['CUSTOMER_ID'] = index
+                    dict_tmp['CUSTOMER_DESCRIPTION'] = customer
+                    list_dicts.append (dict_tmp)
+                    index = index +1 
+
+    return list_dicts
+
+
+
 def main(argv,script):
 
     userscsv='../csv/USERS.csv'
@@ -58,6 +80,8 @@ def main(argv,script):
     if (inputfile == ''):
         print (script + ' -i <inputfile>')
         sys.exit(2)
+
+    print create_customer_dictionary(inputfile)
 
     with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile, open (customerscsv,'w',newline='') as custcsvfileout:
         
