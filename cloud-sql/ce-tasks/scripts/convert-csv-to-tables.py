@@ -121,6 +121,9 @@ def main(argv,script):
             fsr_comment=row[11].replace('"', '').replace(',',' ')
             ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
+
+            #YYYY-MM-DD HH:MM:SS 
+
             # Checking if mandatory fields exist
             if ( fsr == '' or sfopp == ''):
                 skip_row = True
