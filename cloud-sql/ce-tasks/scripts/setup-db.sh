@@ -26,7 +26,7 @@ tables="ROLES STATUS_TYPES TASK_TYPES CE_SKILLS QUEUES CUSTOMERS USERS TASKS TAS
 for table in $tables ; do
     if [ -f $CSVDIR/${table}.csv ] ; then
         echo "Now with table: $table"
-        mysql --host=$MYSQLIP --user=root --password=$pass --execute="USE BTS ; LOAD DATA LOCAL INFILE '$CSVDIR/${table}.csv' INTO TABLE ${table} FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES ; SHOW WARNINGS"
+        mysql --host=$MYSQLIP --user=root --password=$pass --execute="USE BTS ; LOAD DATA LOCAL INFILE '$CSVDIR/${table}.csv' INTO TABLE ${table} FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' IGNORE 1 LINES ; SHOW WARNINGS"
     fi
 done
 
