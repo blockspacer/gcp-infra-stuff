@@ -11,6 +11,7 @@ def get_user_name(name,userscsv):
             next(filereader, None)  # skip the 1st line
             for row in filereader:
                 full_name = row[2] + ' ' + row[3]
+                print (full_name)
                 if ( name == full_name  ):
                     return row[1]
 
