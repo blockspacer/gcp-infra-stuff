@@ -92,7 +92,7 @@ def main(argv,script):
             customers_fieldnames = ['CUSTOMER_ID','CUSTOMER_DESCRIPTION']
             cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
             cust_csv_writer.writeheader()
-            cust_index = 0
+            cust_index = 1
         
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         next(filereader, None)  # skip the 1st line
