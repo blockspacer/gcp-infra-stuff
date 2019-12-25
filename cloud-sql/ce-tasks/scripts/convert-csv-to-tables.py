@@ -109,7 +109,7 @@ def main(argv,script):
                 
             fsr=row[0]
             sfopp=row[1]
-            oppvalue=row[2].replace('"', '').replace(',',' ')	
+            oppvalue=row[2].replace('"', '').replace(',','')
             customer=row[3].replace('"', '').replace(',',' ')	
             customer_contacts=row[4].replace('"', '').replace(',',' ')
             customer_phone=row[5].replace('"', '').replace(',',' ')
