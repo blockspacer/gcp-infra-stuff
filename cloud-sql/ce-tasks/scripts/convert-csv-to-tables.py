@@ -151,7 +151,8 @@ def main(argv,script):
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
                 #print(reqline)
-                 
+                
+                print (reqline['STATUS_ID'])
             
             
             
