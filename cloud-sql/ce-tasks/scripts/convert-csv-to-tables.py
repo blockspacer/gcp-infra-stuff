@@ -148,15 +148,6 @@ def main(argv,script):
                     reqline['OPP_SIZE'] = oppvalue
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
-                #print(reqline)
-                
-                print (reqline['STATUS_ID'])
-            
-            
-            
-            
-            #import os
-            #os.system('cat ../csv/CUSTOMERS.csv')
 
 
 if __name__ == "__main__":
