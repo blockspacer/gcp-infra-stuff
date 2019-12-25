@@ -21,6 +21,7 @@ def get_status_code(status,statuscsv):
             for row in filereader:
                 if ( status == row[1]):
                     return row[0]
+            return 0
 
 def get_customer_id(customer_name,customercsv):
     with open(customercsv, newline='') as csvfile:
