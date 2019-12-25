@@ -146,7 +146,6 @@ def main(argv,script):
                 reqline['CREATED'] = created
                 if ( oppvalue != '' ):
                     reqline['OPP_SIZE'] = oppvalue
-                    print (reqline['OPP_SIZE'])
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
                 #print(reqline)
