@@ -109,17 +109,17 @@ def main(argv,script):
                 
             fsr=row[0]
             sfopp=row[1]
-            oppvalue=row[2]	
+            oppvalue=row[2].replace('"', '').replace(',',' ')	
             customer=row[3].replace('"', '').replace(',',' ')	
-            customer_contacts=row[4]
-            customer_phone=row[5]
+            customer_contacts=row[4].replace('"', '').replace(',',' ')
+            customer_phone=row[5].replace('"', '').replace(',',' ')
             ce_assigned=row[6]
             task_type=row[7]
             status=row[8]
             created=row[9]
             description=row[10]
-            fsr_comment=row[11]
-            ce_comment=row[12]
+            fsr_comment=row[11].replace('"', '').replace(',',' ')
+            ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
             # Checking if mandatory fields exist
             if ( fsr == '' or sfopp == ''):
