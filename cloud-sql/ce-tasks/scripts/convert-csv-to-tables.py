@@ -11,9 +11,11 @@ def get_user_name(name,userscsv):
             next(filereader, None)  # skip the 1st line
             for row in filereader:
                 full_name = row[1] + ' ' + row[2]
-                print (full_name)
+                
                 if ( name == full_name  ):
+                    print row[0]
                     return row[0]
+            return 'Err'
 
 def get_status_code(status,statuscsv):
     with open(statuscsv, newline='') as csvfile:
