@@ -11,10 +11,9 @@ def get_user_name(name,userscsv):
             next(filereader, None)  # skip the 1st line
             for row in filereader:
                 full_name = row[1] + ' ' + row[2]
-                
                 if ( name == full_name  ):
                     return row[0]
-            return 'Err'
+    return 'Err'
 
 def get_status_code(status,statuscsv):
     with open(statuscsv, newline='') as csvfile:
@@ -125,6 +124,8 @@ def main(argv,script):
             change_date=row[13]
             estimated_hours=row[14]
             actual_hours=row[15]
+
+            print (actual_hours)
 
             #YYYY-MM-DD HH:MM:SS 
 
