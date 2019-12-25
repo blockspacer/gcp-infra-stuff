@@ -147,7 +147,8 @@ def main(argv,script):
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
                 reqline['DEAL_YEARS'] = 0
-                reqline['CREATED'] = created
+                if ( created != '' ):
+                    reqline['CREATED'] = created
                 if ( oppvalue != '' ):
                     reqline['OPP_SIZE'] = oppvalue
                 csv_writer.writerow(reqline)
