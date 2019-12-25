@@ -98,7 +98,7 @@ def main(argv,script):
         next(filereader, None)  # skip the 1st line
         next(filereader, None)  # skip the 2nd line
 
-        reqid = 0
+        reqid = 1
 
         for row in filereader:
                 
