@@ -144,8 +144,9 @@ def main(argv,script):
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
                 reqline['CREATED'] = created
-                reqline['OPP_SIZE'] = oppvalue
-                print (reqline['OPP_SIZE'])
+                if ( oppvalue != '' ):
+                    reqline['OPP_SIZE'] = oppvalue
+                    print (reqline['OPP_SIZE'])
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
                 #print(reqline)
