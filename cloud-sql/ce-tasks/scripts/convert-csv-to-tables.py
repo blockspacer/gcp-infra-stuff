@@ -140,15 +140,12 @@ def main(argv,script):
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
-                if ( get_status_code(status,statuscsv) == ''):
-                    reqline['STATUS_ID'] = 0
-                else:
-                    reqline['STATUS_ID'] = get_status_code(status,statuscsv)
+                reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
-                #reqline['CREATED'] = created
-                reqline['CREATED'] = ''
+                reqline['CREATED'] = created
                 reqline['OPP_SIZE'] = oppvalue
+                print (reqline['OPP_SIZE'])
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
                 #print(reqline)
