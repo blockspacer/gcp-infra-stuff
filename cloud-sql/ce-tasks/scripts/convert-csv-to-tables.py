@@ -10,10 +10,10 @@ def get_user_name(name,userscsv):
             filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             next(filereader, None)  # skip the 1st line
             for row in filereader:
-                full_name = row[2] + ' ' + row[3]
+                full_name = row[1] + ' ' + row[2]
                 print (full_name)
                 if ( name == full_name  ):
-                    return row[1]
+                    return row[0]
 
 def get_status_code(status,statuscsv):
     with open(statuscsv, newline='') as csvfile:
