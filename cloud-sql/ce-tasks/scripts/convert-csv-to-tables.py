@@ -132,7 +132,7 @@ def main(argv,script):
                     custline['CUSTOMER_DESCRIPTION'] = customer
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
-                    print (custline)
+                    #print (custline)
 
             if (not skip_row ):
                 reqline['REQUEST_ID'] = reqid
@@ -142,7 +142,8 @@ def main(argv,script):
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
-                reqline['CREATED'] = created
+                #reqline['CREATED'] = created
+                reqline['CREATED'] = ''
                 reqline['OPP_SIZE'] = oppvalue
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
