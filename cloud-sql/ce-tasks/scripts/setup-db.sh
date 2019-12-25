@@ -45,6 +45,6 @@ done
 #    BTS ${CSVDIR}/${table}.csv
 #done
 
-bash query-db.sh
+bash query-db.sh ${MYSQLIP}
 
 
