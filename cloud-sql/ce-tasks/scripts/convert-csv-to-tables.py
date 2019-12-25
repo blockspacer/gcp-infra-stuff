@@ -13,7 +13,6 @@ def get_user_name(name,userscsv):
                 full_name = row[1] + ' ' + row[2]
                 
                 if ( name == full_name  ):
-                    print (row[0])
                     return row[0]
             return 'Err'
 
@@ -147,6 +146,7 @@ def main(argv,script):
                 reqline['REQUEST_ID'] = reqid
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
+                print (reqline['REQUESTOR_ID'])
                 reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
                 print (get_user_name(ce_assigned,userscsv))
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
