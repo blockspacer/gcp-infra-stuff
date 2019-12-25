@@ -24,9 +24,9 @@ mysql --host=$MYSQLIP --user=root --password=$pass bts  < ${SQLDIR}/db_construct
 
 tables="ROLES STATUS_TYPES TASK_TYPES CE_SKILLS QUEUES CUSTOMERS USERS TASKS TASK_OWNERS REQUESTS TASK_DETAILS_UPDATE" 
 for table in $tables ; do
+    echo "Now with table: $table"
     mysql --host=$MYSQLIP --user=root --password=$pass --execute="USE BTS ; LOAD DATA LOCAL INFILE '$CSVDIR/${table}.csv' INTO TABLE ${table} FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES ; SHOW WARNINGS"
 done
-
 
 #for table in $tables ; do
 #    mysqlimport --local --host=$MYSQLIP --user=root \
