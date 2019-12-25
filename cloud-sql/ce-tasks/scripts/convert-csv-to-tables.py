@@ -109,7 +109,7 @@ def main(argv,script):
             fsr=row[0]
             sfopp=row[1]
             oppvalue=row[2]	
-            customer=row[3]	
+            customer=row[3].replace('"', '').replace(',',' ')	
             customer_contacts=row[4]
             customer_phone=row[5]
             ce_assigned=row[6]
@@ -128,6 +128,7 @@ def main(argv,script):
                 with open (customerscsv,'a+',newline='') as custcsvfileout:
                     cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
                     custline['CUSTOMER_ID'] = cust_index
+                    
                     custline['CUSTOMER_DESCRIPTION'] = customer
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
