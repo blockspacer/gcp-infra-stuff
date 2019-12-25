@@ -143,6 +143,7 @@ def main(argv,script):
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
+                reqline['DEAL_YEARS'] = 0
                 reqline['CREATED'] = created
                 if ( oppvalue != '' ):
                     reqline['OPP_SIZE'] = oppvalue
