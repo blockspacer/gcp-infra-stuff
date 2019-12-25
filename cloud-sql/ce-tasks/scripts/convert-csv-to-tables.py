@@ -98,6 +98,8 @@ def main(argv,script):
         next(filereader, None)  # skip the 1st line
         next(filereader, None)  # skip the 2nd line
 
+        reqid = 0
+
         for row in filereader:
                 
             reqline = {}
@@ -131,6 +133,7 @@ def main(argv,script):
                     cust_csv_writer.writerow(custline)
 
             if (not skip_row ):
+                reqline['REQUEST_ID'] = reqid
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
@@ -140,6 +143,7 @@ def main(argv,script):
                 reqline['CREATED'] = created
                 reqline['OPP_SIZE'] = oppvalue
                 csv_writer.writerow(reqline)
+                reqid = reqid + 1
                 print(reqline)
             
             
