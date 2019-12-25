@@ -121,6 +121,8 @@ def main(argv,script):
             fsr_comment=row[11].replace('"', '').replace(',',' ')
             ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
+            estimated_hours=row[14]
+            actual_hours=row[15]
 
             #YYYY-MM-DD HH:MM:SS 
 
@@ -143,6 +145,7 @@ def main(argv,script):
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
+                print (get_user_name(ce_assigned,userscsv))
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
