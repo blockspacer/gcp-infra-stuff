@@ -2,8 +2,8 @@
 
 from os import path
 from io import open
-import sys, getopt
-import csv
+import sys, getopt, csv, re
+
 
 def get_user_name(name,userscsv):
     with open(userscsv, newline='') as csvfile:
