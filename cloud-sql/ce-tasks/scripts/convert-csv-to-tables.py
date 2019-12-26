@@ -125,8 +125,9 @@ def main(argv,script):
             estimated_hours=row[14]
             actual_hours=row[15]
 
-            print (ce_assigned)
-            print (fsr)
+            print ('FSR: ' + fsr)
+            print ('CE: ' + ce_assigned)
+
 
             #YYYY-MM-DD HH:MM:SS 
 
