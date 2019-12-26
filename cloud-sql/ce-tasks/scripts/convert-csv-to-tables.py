@@ -120,6 +120,7 @@ def main(argv,script):
             status=row[8]
             created=row[9]
             description=row[10]
+            print (description)
             fsr_comment=row[11].replace('"', '').replace(',',' ')
             ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
