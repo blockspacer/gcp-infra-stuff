@@ -197,7 +197,5 @@ def main(argv,script):
 
                 reqid = reqid + 1
                 taskid = taskid + 1
-
-
 if __name__ == "__main__":
    main(sys.argv[1:],sys.argv[0])
