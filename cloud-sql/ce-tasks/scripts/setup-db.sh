@@ -39,6 +39,9 @@ for table in $tables ; do
     fi
 done
 
+
+M0YKsspNAA_@pNAAsKpTot
+
 #for table in $tables ; do
 #    mysqlimport --local --host=$MYSQLIP --user=root \
 #    --ignore-lines=1 --password=$pass --fields-terminated-by=',' \
