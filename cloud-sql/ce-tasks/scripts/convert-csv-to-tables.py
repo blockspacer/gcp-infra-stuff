@@ -130,9 +130,6 @@ def main(argv,script):
             #remove letters from string
             #a=''.join(filter(lambda x: x.isdigit(),row[14]))
 
-            print ('FSR: ' + fsr)
-            print ('CE: ' + ce_assigned)
-
             #YYYY-MM-DD HH:MM:SS 
 
             # Checking if mandatory fields exist
