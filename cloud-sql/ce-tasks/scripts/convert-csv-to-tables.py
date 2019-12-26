@@ -132,8 +132,12 @@ def main(argv,script):
             #YYYY-MM-DD HH:MM:SS 
 
             # Checking if mandatory fields exist
-            if ( fsr == '' or sfopp == ''):
+            if ( fsr == '' ):
                 skip_row = True
+            if (sfopp == ''):
+                sfopp = 'missing'
+            if (created == ''):
+                created = '1980-03-31 17:17:17'
 
             if (customer != '' and (get_customer_id(customer,customerscsv) == 0)):
                 with open (customerscsv,'a+',newline='') as custcsvfileout:
