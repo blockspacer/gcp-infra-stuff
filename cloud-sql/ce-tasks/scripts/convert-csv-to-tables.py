@@ -120,7 +120,6 @@ def main(argv,script):
             status=row[8]
             created=row[9]
             description=row[10]
-            print ('Desc: ' + description)
             fsr_comment=row[11].replace('"', '').replace(',',' ')
             ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
@@ -151,7 +150,7 @@ def main(argv,script):
             if (not skip_row ):
                 reqline['REQUEST_ID'] = reqid
                 
-                #reqline['REQUEST_INFORMATION'] = description
+                reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUEST_INFORMATION'] = ''
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 if (get_user_name(ce_assigned,userscsv) != '' ):
