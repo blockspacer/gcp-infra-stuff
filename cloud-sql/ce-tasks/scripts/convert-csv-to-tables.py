@@ -120,7 +120,7 @@ def main(argv,script):
             status=row[8]
             created=row[9]
             description=row[10]
-            print (description)
+            print ('Desc: ' + description)
             fsr_comment=row[11].replace('"', '').replace(',',' ')
             ce_comment=row[12].replace('"', '').replace(',',' ')
             change_date=row[13]
@@ -144,22 +144,18 @@ def main(argv,script):
                 with open (customerscsv,'a+',newline='') as custcsvfileout:
                     cust_csv_writer = csv.DictWriter(custcsvfileout,fieldnames=customers_fieldnames)
                     custline['CUSTOMER_ID'] = cust_index
-                    
                     custline['CUSTOMER_DESCRIPTION'] = customer
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
-                    #print (custline)
 
             if (not skip_row ):
                 reqline['REQUEST_ID'] = reqid
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
-                print (reqline['REQUESTOR_ID'])
                 if (get_user_name(ce_assigned,userscsv) != '' ):
                     reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
                 else:
                     reqline['REQUEST_OWNER'] = 'unassigned'
-                print (reqline['REQUEST_OWNER'])
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
