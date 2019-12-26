@@ -133,9 +133,6 @@ def main(argv,script):
 
             #YYYY-MM-DD HH:MM:SS 
 
-            # Checking if mandatory fields exist
-            if ( fsr == '' ):
-                skip_row = True
             if (sfopp == ''):
                 sfopp = 'missing'
             if (created == ''):
@@ -149,7 +146,7 @@ def main(argv,script):
                     cust_index = cust_index + 1
                     cust_csv_writer.writerow(custline)
 
-            if (not skip_row ):
+            if (get_user_name(fsr,userscsv) != ''):
                 
                 print ('REQ: ' + get_user_name(fsr,userscsv))
 
