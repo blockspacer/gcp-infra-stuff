@@ -73,6 +73,7 @@ def main(argv,script):
     requestscsv='../csv/REQUESTS.csv'
     customerscsv='../csv/CUSTOMERS.csv'
     taskstypescsv='../csv/TASK_TYPES.csv'
+    taskscsv='../csv/TASKS.csv'
 
     inputfile = ''
     outputfile = ''
