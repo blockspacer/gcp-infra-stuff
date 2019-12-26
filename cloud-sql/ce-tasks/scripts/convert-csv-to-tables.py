@@ -149,6 +149,8 @@ def main(argv,script):
 
             if (not skip_row ):
                 reqline['REQUEST_ID'] = reqid
+                reqline['LAST_UPDATE'] = ''
+
                 
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
