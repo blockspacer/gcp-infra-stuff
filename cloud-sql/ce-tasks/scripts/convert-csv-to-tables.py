@@ -26,6 +26,16 @@ def get_status_code(status,statuscsv):
                     return row[0]
             return 0
 
+def get_task_id(task_type,taskstypescsv ):
+    with open(taskstypescsv, newline='') as csvfile:
+            filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            next(filereader, None)  # skip the 1st line
+            for row in filereader:
+                if ( task_type == row[1]):
+                    return row[0]
+            return 0
+
+
 def get_customer_id(customer_name,customercsv):
     with open(customercsv, newline='') as csvfile:
             filereader = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -62,6 +72,7 @@ def main(argv,script):
     statuscsv='../csv/STATUS_TYPES.csv'
     requestscsv='../csv/REQUESTS.csv'
     customerscsv='../csv/CUSTOMERS.csv'
+    taskstypescsv='../csv/TASK_TYPES.csv'
 
     inputfile = ''
     outputfile = ''
@@ -84,7 +95,7 @@ def main(argv,script):
         print (script + ' -i <inputfile>')
         sys.exit(2)
 
-    with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile:
+    with open(requestscsv, 'w', newline='') as csvfileout, open(inputfile, newline='') as csvfile, open(taskscsv,'w', newline='') as csvfiletasks:
         
         # setting up the requests output file
         request_fieldnames = ['REQUEST_ID','REQUEST_INFORMATION','REQUESTOR_ID','REQUEST_OWNER','STATUS_ID','CUSTOMER_ID','OPP_ID','CREATED','LAST_UPDATE','DEAL_YEARS','OPP_SIZE']
@@ -98,17 +109,23 @@ def main(argv,script):
             cust_csv_writer.writeheader()
             cust_index = 1
         
+        # setting up the tasks file
+        task_fieldnames = ['TASK_ID','REQUEST_ID','UPDATE_NO INT','TASK_OWNER' ,'TASK_TYPE_ID' ,'INFORMATION' ,'STATUS_ID' ,'QUEUE_ID' ,'UPDATE_DATE' ,'ESTIMATED_EFFORT_HOURS','ACTUAL_EFFORT_HOURS']
+        csv_tasks_writer = csv.DictWriter(csvfiletasks, fieldnames=task_fieldnames)
+        csv_tasks_writer.writeheader()
+        
         filereader = csv.reader(csvfile, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         next(filereader, None)  # skip the 1st line
         next(filereader, None)  # skip the 2nd line
 
         reqid = 1
+        taskid = 1
 
         for row in filereader:
                 
             reqline = {}
             custline = {}
-            skip_row = False
+            taskline = {}
                 
             fsr=row[0]
             sfopp=row[1]
@@ -128,11 +145,6 @@ def main(argv,script):
             estimated_hours=row[14]
             actual_hours=row[15]
 
-            #remove letters from string
-            #a=''.join(filter(lambda x: x.isdigit(),row[14]))
-
-            #YYYY-MM-DD HH:MM:SS 
-
             if (sfopp == ''):
                 sfopp = 'missing'
             if (created == ''):
@@ -149,7 +161,6 @@ def main(argv,script):
             if (get_user_name(fsr,userscsv) != ''):
                 
                 reqline['REQUEST_ID'] = reqid
-                 
                 reqline['LAST_UPDATE'] = datetime.now().replace(microsecond=0)
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
@@ -167,9 +178,24 @@ def main(argv,script):
                     reqline['OPP_SIZE'] = oppvalue
                 else:
                     reqline['OPP_SIZE'] = 0
-                
                 csv_writer.writerow(reqline)
+                
+                taskline['TASK_ID'] = taskid
+                taskline['REQUEST_ID'] = reqid
+                taskline['UPDATE_NO'] = 1
+                taskline['TASK_OWNER'] = reqline['REQUEST_OWNER']
+                taskline['TASK_TYPE_ID'] = get_task_id(task_type,taskstypescsv )
+                taskline['INFORMATION'] = ce_comment
+                taskline['STATUS_ID'] = reqline['STATUS_ID']
+                taskline['QUEUE_ID'] = 5
+                taskline['UPDATE_DATE'] = reqline['LAST_UPDATE']
+                taskline['ESTIMATED_EFFORT_HOURS'] = estimated_hours
+                taskline['ACTUAL_EFFORT_HOURS'] = actual_hours
+
+                csv_tasks_writer.writerow(taskline)
+
                 reqid = reqid + 1
+                taskid = taskid + 1
 
 
 if __name__ == "__main__":
