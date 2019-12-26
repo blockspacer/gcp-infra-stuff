@@ -13,7 +13,7 @@ def get_user_name(name,userscsv):
                 full_name = row[1] + ' ' + row[2]
                 if ( name == full_name  ):
                     return row[0]
-    return 'Err'
+    return ''
 
 def get_status_code(status,statuscsv):
     with open(statuscsv, newline='') as csvfile:
