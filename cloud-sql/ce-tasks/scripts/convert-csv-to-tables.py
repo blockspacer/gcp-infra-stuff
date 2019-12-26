@@ -110,7 +110,8 @@ def main(argv,script):
                 
             fsr=row[0]
             sfopp=row[1]
-            oppvalue=row[2].replace('"', '').replace(',','')
+            oppvalue = re.sub('[a-z,"!@#$%^&*()"]', '', row[2])
+            #oppvalue=row[2].replace('"', '').replace(',','')
             customer=row[3].replace('"', '').replace(',',' ')	
             customer_contacts=row[4].replace('"', '').replace(',',' ')
             customer_phone=row[5].replace('"', '').replace(',',' ')
@@ -125,9 +126,11 @@ def main(argv,script):
             estimated_hours=row[14]
             actual_hours=row[15]
 
+            #remove letters from string
+            #a=''.join(filter(lambda x: x.isdigit(),row[14]))
+
             print ('FSR: ' + fsr)
             print ('CE: ' + ce_assigned)
-
 
             #YYYY-MM-DD HH:MM:SS 
 
@@ -167,6 +170,9 @@ def main(argv,script):
                     reqline['CREATED'] = created
                 if ( oppvalue != '' ):
                     reqline['OPP_SIZE'] = oppvalue
+                else:
+                    reqline['OPP_SIZE'] = 0
+                
                 csv_writer.writerow(reqline)
                 reqid = reqid + 1
 
