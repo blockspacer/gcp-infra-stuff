@@ -148,8 +148,6 @@ def main(argv,script):
 
             if (get_user_name(fsr,userscsv) != ''):
                 
-                print ('REQ: ' + get_user_name(fsr,userscsv))
-
                 reqline['REQUEST_ID'] = reqid
                  
                 reqline['LAST_UPDATE'] = datetime.now().replace(microsecond=0)
