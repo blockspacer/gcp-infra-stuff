@@ -30,6 +30,8 @@ for table in $tables ; do
 done
 
 echo "Now Querying the DB"
+
 mysql --host=$MYSQLIP --user=root --password=$pass BTS  < ../sql/query_entire_db.sql
 
+echo "mysql --host=$MYSQLIP --user=root --password=$pass BTS"
 
