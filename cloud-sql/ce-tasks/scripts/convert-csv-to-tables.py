@@ -111,7 +111,7 @@ def main(argv,script):
             cust_index = 1
         
         # setting up the tasks file
-        task_fieldnames = ['TASK_ID','REQUEST_ID','UPDATE_NO INT','TASK_OWNER' ,'TASK_TYPE_ID' ,'INFORMATION' ,'STATUS_ID' ,'QUEUE_ID' ,'UPDATE_DATE' ,'ESTIMATED_EFFORT_HOURS','ACTUAL_EFFORT_HOURS']
+        task_fieldnames = ['TASK_ID','REQUEST_ID','UPDATE_NO','TASK_OWNER' ,'TASK_TYPE_ID' ,'INFORMATION' ,'STATUS_ID' ,'QUEUE_ID' ,'UPDATE_DATE' ,'ESTIMATED_EFFORT_HOURS','ACTUAL_EFFORT_HOURS']
         csv_tasks_writer = csv.DictWriter(csvfiletasks, fieldnames=task_fieldnames)
         csv_tasks_writer.writeheader()
         
