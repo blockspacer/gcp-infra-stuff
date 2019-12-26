@@ -29,6 +29,6 @@ for table in $tables ; do
     fi
 done
 
-bash query-db.sh ${MYSQLIP}
+mysql --host=$MYSQLIP --user=root --password=$pass bts  < ../sql/query_entire_db.sql
 
 
