@@ -150,7 +150,11 @@ def main(argv,script):
                     cust_csv_writer.writerow(custline)
 
             if (not skip_row ):
+                
+                print ('REQ: ' + reqid)
+
                 reqline['REQUEST_ID'] = reqid
+                 
                 reqline['LAST_UPDATE'] = datetime.now().replace(microsecond=0)
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
