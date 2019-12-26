@@ -11,3 +11,5 @@ SELECT * FROM CE_SKILLS;
 SELECT * FROM QUEUES;
 SELECT * FROM STATUS_TYPES;
 SELECT * FROM TASK_TYPES;
+
+select requestor_id from customers;
