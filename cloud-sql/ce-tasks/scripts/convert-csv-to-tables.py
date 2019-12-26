@@ -151,7 +151,7 @@ def main(argv,script):
 
             if (not skip_row ):
                 
-                print ('REQ: ' + reqline['REQUESTOR_ID'])
+                print ('REQ: ' + get_user_name(fsr,userscsv))
 
                 reqline['REQUEST_ID'] = reqid
                  
