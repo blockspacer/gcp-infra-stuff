@@ -16,7 +16,7 @@ fi
 pass=`cat $PASSWD`
 MYSQLIP=`cat $IPFILE`
 
-mysql --host=$MYSQLIP --user=$USERNAME --password=$pass bts  < ${SQLDIR}/db_construct.sql
+mysql --host=$MYSQLIP --user=root --password=$pass bts  < ${SQLDIR}/db_construct.sql
 
 tables="ROLES SKILL_MAPPINGS SKILL_TYPES STATUS_TYPES TASK_TYPES USERS CUSTOMERS KNOWLEDGE_MAPPINGS QUEUES REQUESTS TASKS"
 
