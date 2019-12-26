@@ -13,7 +13,7 @@ if [ $? -eq 0 ] ; then
     python3 convert-csv-to-tables.py  -i ${CE_TASK_TSV}
 fi
 
-pass=`cat $PASSWD`
+pass=`cat $SELFPASSWD`
 MYSQLIP=`cat $IPFILE`
 
 echo $MYSQLIP
