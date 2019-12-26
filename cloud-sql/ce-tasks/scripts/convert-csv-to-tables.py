@@ -150,7 +150,9 @@ def main(argv,script):
 
             if (not skip_row ):
                 reqline['REQUEST_ID'] = reqid
-                reqline['REQUEST_INFORMATION'] = description
+                
+                #reqline['REQUEST_INFORMATION'] = description
+                reqline['REQUEST_INFORMATION'] = ''
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 if (get_user_name(ce_assigned,userscsv) != '' ):
                     reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
