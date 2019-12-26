@@ -18,7 +18,9 @@ MYSQLIP=`cat $IPFILE`
 
 echo $MYSQLIP
 
-mysql --host=$MYSQLIP --user=root --password=$pass bts  < ${SQLDIR}/db_construct.sql
+mysql --host=$MYSQLIP --user=root --password=$pass BTS  < ${SQLDIR}/db_construct.sql
+
+exit
 
 tables="ROLES SKILL_MAPPINGS SKILL_TYPES STATUS_TYPES TASK_TYPES USERS CUSTOMERS KNOWLEDGE_MAPPINGS QUEUES REQUESTS TASKS"
 
