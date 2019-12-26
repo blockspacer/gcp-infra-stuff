@@ -151,7 +151,7 @@ def main(argv,script):
 
             if (not skip_row ):
                 
-                print ('REQ: ' + reqid)
+                print ('REQ: ' + reqline['REQUESTOR_ID'])
 
                 reqline['REQUEST_ID'] = reqid
                  
