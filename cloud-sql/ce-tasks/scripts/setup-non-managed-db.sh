@@ -13,6 +13,8 @@ if [ $? -eq 0 ] ; then
     python3 convert-csv-to-tables.py  -i ${CE_TASK_TSV}
 fi
 
+gcloud compute --project=task-navigator firewall-rules create allow-remote-mysql1 --direction=INGRESS --priority=9000 --network=privatenet --action=ALLOW --rules=tcp:3306 --source-ranges=0.0.0.0/0
+
 pass=`cat $SELFPASSWD`
 MYSQLIP=`cat $IPFILE`
 
