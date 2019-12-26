@@ -154,8 +154,11 @@ def main(argv,script):
                 reqline['REQUEST_INFORMATION'] = description
                 reqline['REQUESTOR_ID'] = get_user_name(fsr,userscsv)
                 print (reqline['REQUESTOR_ID'])
-                reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
-                print (get_user_name(ce_assigned,userscsv))
+                if (get_user_name(ce_assigned,userscsv) != '' ):
+                    reqline['REQUEST_OWNER'] = get_user_name(ce_assigned,userscsv)
+                else:
+                    reqline['REQUEST_OWNER'] = 'unassigned'
+                print (reqline['REQUEST_OWNER'])
                 reqline['STATUS_ID'] = get_status_code(status,statuscsv)
                 reqline['CUSTOMER_ID'] = get_customer_id(customer,customerscsv)
                 reqline['OPP_ID'] = sfopp
