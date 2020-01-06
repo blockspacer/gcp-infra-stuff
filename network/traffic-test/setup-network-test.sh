@@ -1,16 +1,14 @@
 #!/bin/bash
 
-
-
 PROJECT_ID=`gcloud config get-value project`
 PROJECT_NUMBER=`gcloud projects describe ${PROJECT_ID} --format="csv(projectNumber)" | tail -1`
 SERVICE_ACOUNT=${PROJECT_NUMBER}-compute@developer.gserviceaccount.com
 MACHINE_TYPE=n1-standard-4
 #PREEMPTIBLE=--preemptible
-#ZONES=`gcloud compute zones list | awk '{print $1}'`
 REGIONS=`gcloud compute regions list | awk '{print $1}' | uniq`
 NETWORK_NAME=network-latency-test-vpc
 
+echo "Enabling service compute.googleapis.com"
 gcloud services enable --project $PROJECT_ID compute.googleapis.com 
 
 gcloud compute --project=${PROJECT_ID} networks list | grep ${NETWORK_NAME} > /dev/null 2>&1
@@ -27,7 +25,7 @@ for REGION in $REGIONS ; do
   gcloud compute instances list --project=${PROJECT_ID} --zones=${ZONE} | grep ${ZONE}-nw-test-vm > /dev/null 2>&1
   if [ $? -ne 0 ] ; then
 
-    echo "Creating ${ZONE}-nw-test-vm..."
+    echo "Creating ${ZONE}-nw-test-vm... in region $REGION"
     time gcloud beta compute --project=${PROJECT_ID} \
     instances create ${ZONE}-nw-test-vm \
     --zone=${ZONE} \
