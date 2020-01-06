@@ -10,8 +10,9 @@ if [ "${instances_to_delete}" != "" ] ; then
 
     for instance in ${instances_to_delete} ; do
         zone=`echo $instance | sed "s/-nw-test-vm//g"`
-        echo "deleting $instance"
-        gcloud compute instances delete $instance --quiet --delete-disks=all --zone $zone > /dev/null 2&>1
+        echo "gcloud compute instances delete $instance --quiet --delete-disks=all --zone $zone"
+        gcloud compute instances delete $instance --quiet --delete-disks=all --zone $zone 
+
 
     done
 
