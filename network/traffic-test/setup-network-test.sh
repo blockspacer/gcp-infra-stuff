@@ -17,6 +17,11 @@ if [ $? -ne 0 ] ; then
   gcloud compute --project=${PROJECT_ID} networks create ${NETWORK_NAME} --subnet-mode=auto
 fi
 
+for REGION in ${REGIONS} ; do
+  echo "gcloud compute networks subnets update network-latency-test-vpc --region=${REGION} --enable-flow-logs"
+  gcloud compute networks subnets update network-latency-test-vpc --region=${REGION} --enable-flow-logs &
+done
+
 echo "Now Creating VM in each region"
 for REGION in $REGIONS ; do
 
