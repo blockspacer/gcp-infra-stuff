@@ -9,7 +9,7 @@ sizes="20 500 1500 4500"
 
 for target in `gcloud compute instances list | grep "\-nw-test-vm" | awk '{print $5}'` ; do
 
-    for $size in $sizes ; do
+    for size in $sizes ; do
         sudo ping -i0.05  $target -c 100 -s $size \
         | grep -v "\---" | grep -v pipe | grep -v "\%" \
         | grep -v "PING" | uniq | awk '{print $1 "," $4",source_host,"$7}' \
