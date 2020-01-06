@@ -13,12 +13,19 @@ if [ $? -eq 0 ] ; then
     python3 convert-csv-to-tables.py  -i ${CE_TASK_TSV}
 fi
 
-gcloud compute --project=task-navigator firewall-rules create allow-remote-mysql1 --direction=INGRESS --priority=9000 --network=privatenet --action=ALLOW --rules=tcp:3306 --source-ranges=0.0.0.0/0
-
 pass=`cat $SELFPASSWD`
 MYSQLIP=`cat $IPFILE`
 
 echo $MYSQLIP
+
+FW_NAME=mysql-allow-tcp-3306
+gcloud compute --project=task-navigator firewall-rules list --format=text | grep 'name:' | awk '{print $2}' | grep $FW_NAME
+if [ $? -ne 0 ] ; then
+    gcloud compute --project=task-navigator firewall-rules create $FW_NAME \
+    --direction=INGRESS --priority=600 --network=privatenet --action=ALLOW \
+    --rules=tcp:3306,tcp:22 --source-ranges=0.0.0.0/0 \
+    --target-tags=mysql
+fi
 
 mysql --host=$MYSQLIP --user=root --password=$pass BTS  < ${SQLDIR}/db_construct.sql
 
@@ -32,6 +39,7 @@ for table in $tables ; do
 done
 
 echo "Now Querying the DB"
+
 
 mysql --host=$MYSQLIP --user=root --password=$pass BTS  < ../sql/query_entire_db.sql
 
