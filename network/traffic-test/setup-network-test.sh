@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Starting with network testing setup script"
-PROJECT_ID=`gcloud config get-value project` > > /dev/null 2>&1
+PROJECT_ID=`gcloud config get-value project` 
 echo ${PROJECT_ID}
 PROJECT_NUMBER=`gcloud projects describe ${PROJECT_ID} --format="csv(projectNumber)" | tail -1`
 echo ${PROJECT_NUMBER}
