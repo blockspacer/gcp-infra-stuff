@@ -5,7 +5,7 @@ source params.sh
 #from each machine run this:
 
 curr_host=`hostname`
-sizes="20 500 1500 4500"
+sizes="56 504 1492 4492 15492"
 
 for target in `gcloud compute instances list | grep "\-nw-test-vm" | awk '{print $5}'` ; do
 
