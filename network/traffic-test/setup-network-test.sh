@@ -1,15 +1,12 @@
 #!/bin/bash
 
-echo "Starting with network testing setup script"
-PROJECT_ID=`gcloud config get-value project` 
-PROJECT_NUMBER=`gcloud projects describe ${PROJECT_ID} --format="csv(projectNumber)" | tail -1`
-echo "Project ID: ${PROJECT_ID}; Project number: ${PROJECT_NUMBER}"
+source params.sh
 
-SERVICE_ACOUNT=${PROJECT_NUMBER}-compute@developer.gserviceaccount.com
-MACHINE_TYPE=n1-standard-4
 #PREEMPTIBLE=--preemptible
 REGIONS=`gcloud compute regions list | grep -v NAME | awk '{print $1}' | uniq`
-NETWORK_NAME=network-latency-test-vpc
+
+echo "Starting with network testing setup script"
+
 
 echo "Enabling service compute.googleapis.com"
 gcloud services enable --project $PROJECT_ID compute.googleapis.com 
