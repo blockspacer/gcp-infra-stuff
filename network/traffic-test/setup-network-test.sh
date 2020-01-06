@@ -39,7 +39,7 @@ for REGION in $REGIONS ; do
     --image-project=ubuntu-os-cloud \
     --boot-disk-size=30GB \
     --tags=nw-test-vm \
-    --boot-disk-type=pd-ssd 
+    --boot-disk-type=pd-ssd &
   fi
 
 done
