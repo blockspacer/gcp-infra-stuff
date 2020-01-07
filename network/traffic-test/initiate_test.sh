@@ -12,7 +12,7 @@ gcloud compute instances list | grep "\-nw-test-vm" | awk '{print $1" "$5}' > /t
 for target in `cat /tmp/file$$ | awk '{print $2}'` ; do
 
     target_host=`grep $target /tmp/file$$ | awk '{print $1}'`
-    if [ "${target_host}" != "${curr_host}"] ; then
+    if [ "${target_host}" != "${curr_host}" ] ; then
 
         for size in $sizes ; do
             sudo ping -i0.05  $target -c 100 -s $size \
