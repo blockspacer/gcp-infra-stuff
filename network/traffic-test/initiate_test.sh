@@ -16,7 +16,7 @@ for target in `cat /tmp/file$$ | awk '{print $2}'` ; do
     for size in $sizes ; do
         sudo ping -i0.05  $target -c 100 -s $size \
         | grep -v "\---" | grep -v pipe | grep -v "\%" \
-        | grep -v "PING" | uniq | awk '{print $1 ",target_host",source_host,"$7}' \
+        | grep -v "PING" | uniq | awk '{print $1 ",target_host,source_host,"$7}' \
         | sed "s/://g" | sed "s/time=//g" | sed "s/source_host/${curr_host}/g" | grep -v rtt | grep -v "\,," | sed "s/target_host/${target_host}/g"
     done
 
