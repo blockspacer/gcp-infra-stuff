@@ -15,12 +15,20 @@ for target in `cat /tmp/file$$ | awk '{print $2}'` ; do
     if [ "${target_host}" != "${curr_host}" ] ; then
 
         for size in $sizes ; do
-            sudo ping -i0.05  $target -c 100 -s $size \
+            sudo ping -i0.01  $target -c 100 -s $size \
             | grep -v "\---" | grep -v pipe | grep -v "\%" \
-            | grep -v "PING" | uniq | awk '{print  ",target_host,source_host,"$1","$7}' \
-            | sed "s/://g" | sed "s/time=//g" | sed "s/source_host/${curr_host}/g" | grep -v rtt | grep -v "\,," | sed "s/target_host/${target_host}/g"
+            | grep -v "PING" | uniq | awk '{print  "ping,source_host,target_host,"$1","$7}' \
+            | sed "s/://g" | sed "s/time=//g" | sed "s/source_host/${curr_host}/g"  \
+            | grep -v rtt | grep -v "\,," \
+            | sed "s/target_host/${target_host}/g"
         done
 
     fi
 
 done
+
+
+# run in the server
+sudo apt-get update
+sudo apt-get install inetutils-traceroute git dnsutils curl -y
+
