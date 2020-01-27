@@ -109,5 +109,18 @@ kubectl patch configmap config-domain --namespace knative-serving --patch \
 * use the file set-up-locust to set-up 
 * get the ingress IP for locust and use the browser to start a tests
  
+## Debugging Cloud Run
+### starting point
+https://cloud.google.com/run/docs/troubleshooting
+https://cloud.google.com/run/docs/testing/local
 
-
+### Debugging locally
+* Run this:
+```
+export IMAGE_NAME=rest-api
+export PROJECT_ID=$(gcloud config get-value project)
+export PORT=8080
+docker run -p 9090:${PORT} -e PORT=${PORT} gcr.io/${PROJECT_ID}/${IMAGE_NAME}
+```
+* Check if it is working
+Open http://localhost:9090 
