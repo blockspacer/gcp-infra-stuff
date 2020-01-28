@@ -37,7 +37,8 @@ spec:
               value: master
             - name: TARGET_HOST
               #value: https://amiteinav-sandbox.appspot.com
-              value: https://pdf-amit-65aqzgjh5a-uc.a.run.app
+              #value: https://pdf-amit-65aqzgjh5a-uc.a.run.app
+              value: https://pdf-65aqzgjh5a-uc.a.run.app
           ports:
             - name: loc-master-web
               containerPort: 8089
