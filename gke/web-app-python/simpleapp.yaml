@@ -40,19 +40,3 @@ spec:
     schedulerName: default-scheduler
     securityContext: {}
     terminationGracePeriodSeconds: 30
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    run: simpleapp
-  name: simpleapp
-  namespace: default
-spec:
-  ports:
-    port: 8000
-    protocol: TCP
-    targetPort: 8000
-  selector:
-    run: simpleapp
-  sessionAffinity: None
-  type: LoadBalancer
