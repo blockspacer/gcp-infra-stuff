@@ -9,7 +9,6 @@ RUN pip install Flask
 # Bundle app source
 COPY simpleapp.py /src/simpleapp.py
 COPY home.html /src/template/home.html
-COPY google-cloud-logo.png /src/google-cloud-logo.png
 
 EXPOSE  8000
 CMD ["python", "/src/simpleapp.py", "-p 8000"]
