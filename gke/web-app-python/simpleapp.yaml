@@ -47,7 +47,6 @@ metadata:
   name: simpleapp
   namespace: default
 spec:
-   externalTrafficPolicy: Cluster
   ports:
     port: 8000
     protocol: TCP
