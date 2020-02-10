@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/google-samples/zone-printer:0.1
+        image: gcr.io/amiteinav-sandbox/mci-with-go
         ports:
           - containerPort: 80
