@@ -21,6 +21,14 @@ gcloud beta compute --project $PROJECT networks subnets create us-east1-multi-in
 --range=172.16.2.0/24 \
 --enable-private-ip-google-access \
 --enable-flow-logs
+
+gcloud beta compute --project $PROJECT networks subnets create eu-west1-multi-ingress-subnet \
+--network $VPC \
+--region=europe-west1 \
+--range=172.16.3.0/24 \
+--enable-private-ip-google-access \
+--enable-flow-logs
+
 ```
 ## Creating the service account
 ```
@@ -39,32 +47,46 @@ gcloud projects add-iam-policy-binding $PROJECT \
 
 * Create clusters in us-central and the us-east1 
 ```
+PROJECT=`gcloud config get-value project`
 VPC=multi-ingress-vpc 
 SUBNET_CENTRAL=us-central-multi-ingress-subnet
 SUBNET_EAST=us-east1-multi-ingress-subnet
+SUBNET_EU=eu-west1-multi-ingress-subnet
 
 gcloud container clusters create   \
     --zone=us-central1-a --enable-ip-alias --image-type="COS" --num-nodes="3" --network=$VPC --subnetwork=$SUBNET_CENTRAL \
-    --enable-cloud-logging --enable-cloud-monitoring --enable-ip-alias \
+    --enable-cloud-logging --enable-stackdriver-kubernetes --enable-ip-alias --metadata disable-legacy-endpoints=false \
     --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
+    --no-enable-autoupgrade \
     --tags="allow-health-checks" \
-    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-central-cluster
+    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-us-central-cluster &
 
 gcloud container clusters create   \
     --zone=us-east1-b --enable-ip-alias --image-type="COS" --num-nodes="3" --network=$VPC --subnetwork=$SUBNET_EAST \
-    --enable-cloud-logging --enable-cloud-monitoring --enable-ip-alias \
+    --enable-cloud-logging --enable-stackdriver-kubernetes --enable-ip-alias --metadata disable-legacy-endpoints=false \
     --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
+    --no-enable-autoupgrade \
     --tags="allow-health-checks" \
-    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-east-cluster
+    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-us-east-cluster &
 
+gcloud container clusters create   \
+    --zone=europe-west1-b --enable-ip-alias --image-type="COS" --num-nodes="3" --network=$VPC --subnetwork=$SUBNET_EU \
+    --enable-cloud-logging --enable-stackdriver-kubernetes --enable-ip-alias --metadata disable-legacy-endpoints=false \
+    --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
+    --no-enable-autoupgrade \
+    --tags="allow-health-checks" \
+    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-europe-west-cluster &
 ```
 * Get Clusters credentials
+```
 KUBECONFIG=clusters.yaml gcloud container clusters \
-    get-credentials mci-east-cluster --zone=us-east1-b
+    get-credentials mci-us-central-cluster  --zone=us-central1-a
 
 KUBECONFIG=clusters.yaml gcloud container clusters \
-    get-credentials mci-central-cluster --zone=us-central1-a
+    get-credentials mci-us-east-cluster  --zone=us-east1-b
 
+KUBECONFIG=clusters.yaml gcloud container clusters \
+    get-credentials mci-europe-west-cluster --zone=europe-west1-b
 ```
 
 ### Delpoy the sample application
@@ -90,7 +112,8 @@ gcloud compute addresses create --global "${ZP_KUBEMCI_IP}" --network-tier=PREMI
 ### Make sure FW rules are there
 ```
 * Create the FW
-VPC=`gcloud container clusters describe east-cluster --zone us-east1-b --format="value(network)" `
+#VPC=`gcloud container clusters describe mci-us-central-cluster --zone us-central1-a --format="value(network)" `
+VPC=multi-ingress-vpc
 gcloud compute firewall-rules create fw-allow-health-checks-${VPC} \
     --network ${VPC} \
     --action ALLOW \
