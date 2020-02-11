@@ -5,6 +5,7 @@ metadata:
   labels:
     app: zoneprinter
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: zoneprinter
@@ -22,7 +23,7 @@ spec:
             # You must specify requests for CPU to autoscale
             # based on CPU utilization
           requests:
-          cpu: "250m"
+            cpu: "250m"
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
