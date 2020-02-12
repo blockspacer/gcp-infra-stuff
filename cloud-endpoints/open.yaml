@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  title: Aqua
+  description: Sample API on Cloud Endpoints with a Google Cloud Functions backend
+  version: 1.0.0
+host: test-for-aqua-eaez4x244q-uc.a.run.app
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /hello:
+    get:
+      summary: Greet the user
+      operationId: hello
+      x-google-backend:
+        address: https://us-central1-liadush-258608.cloudfunction.net/hello
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+ 
+  /uploads:
+    post:
+      summary: Upload Images
+      operationId: upload
+      x-google-backend:
+        address: https://us-central1-liadush-258608.cloudfunctions.net/uploads
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            required: 
+              - username
+            properties:
+              username:
+                type: string
+              firstname:
+                type: string
+              lastname: 
+                type: string
+              hobbies:
+                type: string
+      responses:
+        201:
+          description: Created
