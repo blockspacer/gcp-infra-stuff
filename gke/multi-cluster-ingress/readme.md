@@ -107,6 +107,7 @@ for ctx in $(kubectl config get-contexts -o=name --kubeconfig clusters.yaml); do
 ```
 ZP_KUBEMCI_IP="zp-kubemci-ip"
 gcloud compute addresses create --global "${ZP_KUBEMCI_IP}" --network-tier=PREMIUM
+sed -i -e "s/\$ZP_KUBEMCI_IP/${ZP_KUBEMCI_IP}/" ingress/ingress.yaml
 ```
 
 ### Make sure FW rules are there
@@ -126,11 +127,15 @@ gcloud compute firewall-rules create fw-allow-health-checks-${VPC} \
 
 ### Deploy the multi-cluster Ingress wtih kubecmi
 ```
+wget https://storage.googleapis.com/kubemci-release/release/latest/bin/linux/amd64/kubemci
+chmod +x ./kubemci
+mv ./kubemci ~/bin/kubemci
 export PROJECT=`gcloud config get-value project`
 gcloud compute project-info update --default-network-tier PREMIUM
 kubemci create zone-printer \
     --ingress=ingress/ingress.yaml \
     --gcp-project=$PROJECT \
+    --force \
     --kubeconfig=clusters.yaml
 ```
 
