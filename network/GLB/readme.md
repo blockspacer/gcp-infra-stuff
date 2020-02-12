@@ -1,13 +1,35 @@
 # Creating Cross-region Load Balancing
 
 ## Configuring instances
-* Create the two instances in us-central1 region
+
+* Create the network
+```
+PROJECT=`gcloud config get-value project`
+VPC=global-web-app
+gcloud compute --project $PROJECT networks create $VPC --subnet-mode=auto
+```
+
+* Create the service account
+```
+PROJECT=`gcloud config get-value project`
+gcloud iam service-accounts create gce-backend-sa \
+      --display-name "gce backend service account"
+
+gcloud projects add-iam-policy-binding $PROJECT \
+  --member serviceAccount:gce-backend-sa@${PROJECT}.iam.gserviceaccount.com \
+  --role roles/editor
+```
+
+* Create the two instances in us-central1 region (remove the Standard if you want premium)
 ```
 gcloud compute instances create www-1 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone us-central1-b \
-    --tags http-tag \
+    --network-tier=STANDARD \
+    --tags=http-tag \
+    --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
@@ -20,7 +42,10 @@ gcloud compute instances create www-2 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone us-central1-b \
+    --network-tier=STANDARD \
     --tags http-tag \
+      --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
@@ -34,7 +59,10 @@ gcloud compute instances create www-3 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone europe-west1-b \
+    --network-tier=STANDARD \
     --tags http-tag \
+      --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
@@ -47,7 +75,10 @@ gcloud compute instances create www-4 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone europe-west1-b \
+   --network-tier=STANDARD \
     --tags http-tag \
+      --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
@@ -60,12 +91,15 @@ gcloud compute instances create www-5 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone asia-northeast1-b \
+  --network-tier=STANDARD \
     --tags http-tag \
+      --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
       service apache2 restart
-      echo '<!doctype html><html><body><h1>asia-northeast1-b-www-3</h1></body></html>' | tee /var/www/html/index.html
+      echo '<!doctype html><html><body><h1>asia-northeast1-b-www-5</h1></body></html>' | tee /var/www/html/index.html
       EOF"
 ```
 ```
@@ -73,62 +107,50 @@ gcloud compute instances create www-6 \
     --image-family debian-9 \
     --image-project debian-cloud \
     --zone asia-northeast1-b \
+  --network-tier=STANDARD \
     --tags http-tag \
+      --network=$VPC \
+    --subnet=$VPC \
     --metadata startup-script="#! /bin/bash
       apt-get update
       apt-get install apache2 -y
       service apache2 restart
-      echo '<!doctype html><html><body><h1>asia-northeast1-b-www-4</h1></body></html>' | tee /var/www/html/index.html
+      echo '<!doctype html><html><body><h1>asia-northeast1-b-www-6</h1></body></html>' | tee /var/www/html/index.html
       EOF" 
 ```
 * Create firewall rule
 ```
+PROJECT=`gcloud config get-value project`
+VPC=global-web-app
 gcloud compute firewall-rules create www-firewall \
-    --target-tags http-tag --allow tcp:80
+    --target-tags http-tag --allow tcp:80 --network $VPC
 ```
 ## Configuring services for load balancing
 * Create IPv4 global static external IP address for your load balancer.
 ```
-gcloud compute addresses create lb-ip-cr \
+gcloud compute addresses create lb-ip-v4-global \
     --ip-version=IPV4 \
     --global
 ```
-* Create an instance group for each of your zones.
+* Create an instance group for each of your zones and define an HTTP service and map a port name to the relevant port
 ```
-gcloud compute instance-groups unmanaged create us-resources-w --zone us-central1-b
-gcloud compute instance-groups unmanaged create europe-resources-w --zone europe-west1-b
-gcloud compute instance-groups unmanaged create asia-resources-w --zone asia-northeast1-b 
+gcloud compute --project=$PROJECT instance-groups unmanaged create us-resources-www --zone=us-central1-b
+gcloud compute --project=$PROJECT instance-groups unmanaged add-instances us-resources-www --zone=us-central1-b --instances=www-1,www-2
+gcloud compute instance-groups unmanaged set-named-ports us-resources-www --named-ports http:80 --zone us-central1-b 
 
-```
-* Add the instances you created earlier to the instance groups
-```
-gcloud compute instance-groups unmanaged add-instances us-resources-w \
-    --instances www-1,www-2 \
-    --zone us-central1-b
-gcloud compute instance-groups unmanaged add-instances europe-resources-w \
-    --instances www-3,www-4 \
-    --zone europe-west1-b
-gcloud compute instance-groups unmanaged add-instances asia-resources-w \
-    --instances www-5,www-6 \
-    --zone asia-northeast1-b
+gcloud compute --project=$PROJECT instance-groups unmanaged create europe-resources-www --zone=europe-west1-b
+gcloud compute --project=$PROJECT instance-groups unmanaged add-instances europe-resources-www --zone=europe-west1-b --instances=www-3,www-4
+gcloud compute instance-groups unmanaged set-named-ports europe-resources-www --named-ports http:80 --zone europe-west1-b 
+
+gcloud compute --project=$PROJECT instance-groups unmanaged create asia-resources-www --zone=asia-northeast1-b
+gcloud compute --project=$PROJECT instance-groups unmanaged add-instances asia-resources-www --zone=asia-northeast1-b --instances=www-5,www-6
+gcloud compute instance-groups unmanaged set-named-ports asia-resources-www --named-ports http:80 --zone asia-northeast1-b
 ```
 * Create health check
 ```
 gcloud compute health-checks create http http-basic-check
 ```
-# Configuring the load balancing service
-* For each instance group, define an HTTP service and map a port name to the relevant port
-```
-gcloud compute instance-groups unmanaged set-named-ports us-resources-w \
-    --named-ports http:80 \
-    --zone us-central1-b
-gcloud compute instance-groups unmanaged set-named-ports europe-resources-w \
-    --named-ports http:80 \
-    --zone europe-west1-b
-gcloud compute instance-groups unmanaged set-named-ports asia-resources-w \
-    --named-ports http:80 \
-    --zone asia-northeast1-b
-```
+## Configuring the load balancing service
 * Create a backend service and specify its parameters.
 ```
 gcloud compute backend-services create web-map-backend-service \
@@ -142,7 +164,7 @@ gcloud compute backend-services add-backend web-map-backend-service \
     --balancing-mode UTILIZATION \
     --max-utilization 0.8 \
     --capacity-scaler 1 \
-    --instance-group us-resources-w \
+    --instance-group us-resources-www \
     --instance-group-zone us-central1-b \
     --global
 ```
@@ -151,7 +173,7 @@ gcloud compute backend-services add-backend web-map-backend-service \
     --balancing-mode UTILIZATION \
     --max-utilization 0.8 \
     --capacity-scaler 1 \
-    --instance-group europe-resources-w \
+    --instance-group europe-resources-www \
     --instance-group-zone europe-west1-b \
     --global
 ```
@@ -160,7 +182,7 @@ gcloud compute backend-services add-backend web-map-backend-service \
     --balancing-mode UTILIZATION \
     --max-utilization 0.8 \
     --capacity-scaler 1 \
-    --instance-group asia-resources-w \
+    --instance-group asia-resources-www \
     --instance-group-zone asia-northeast1-b \
     --global
 ```
@@ -174,7 +196,7 @@ gcloud compute url-maps create web-map \
 gcloud compute target-http-proxies create http-lb-proxy \
     --url-map web-map
 ```
-LB_IP_ADDRESS=`gcloud compute addresses list | grep "lb-ip-cr" | awk '{print $2}'`
+LB_IP_ADDRESS=`gcloud compute addresses list | grep "lb-ip-v4-global" | awk '{print $2}'`
 gcloud compute forwarding-rules create http-cr-rule \
     --address ${LB_IP_ADDRESS} \
     --global \
@@ -191,7 +213,8 @@ curl -s http://${LB_IP_ADDRESS}:80
 gcloud compute firewall-rules create allow-lb-and-healthcheck \
     --source-ranges 130.211.0.0/22,35.191.0.0/16 \
     --target-tags http-tag \
-    --allow tcp:80
+    --allow tcp:80 \
+    --network $VPC
 ```
 * Remove the rule that allows HTTP(S) traffic from other sources.
 ```
