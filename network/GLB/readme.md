@@ -209,7 +209,7 @@ gcloud compute url-maps create web-map \
 ```
 gcloud compute target-http-proxies create http-lb-proxy \
     --url-map web-map
-```
+
 LB_IP_ADDRESS=`gcloud compute addresses list | grep "lb-ip-v4-global" | awk '{print $2}'`
 
 gcloud compute forwarding-rules create http-cr-rule \
