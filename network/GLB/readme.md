@@ -225,6 +225,7 @@ curl -s http://${LB_IP_ADDRESS}:80
 ## Shutting off HTTP access from everywhere but the load balancing service
 * Once everything is working, modify your firewall rules so HTTP(S) traffic to your instances can only come from your load balancing service.
 ```
+VPC=global-web-app
 gcloud compute firewall-rules create allow-lb-and-healthcheck \
     --source-ranges 130.211.0.0/22,35.191.0.0/16 \
     --target-tags http-tag \
@@ -247,7 +248,7 @@ done
 ## Load testing - Create some traffic using locust
 * Get the GLB IP address
 ```
-LB_IP_ADDRESS=`gcloud compute addresses list | grep "lb-ip-cr" | awk '{print $2}'`
+LB_IP_ADDRESS=`gcloud compute addresses list | grep "lb-ip-v4-global" | awk '{print $2}'`
 ```
 
 * Update the locust-files with the LB_IP_ADDRESS
