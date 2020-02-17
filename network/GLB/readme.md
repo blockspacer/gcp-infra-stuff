@@ -1,4 +1,8 @@
-# Creating Cross-region Load Balancing with Global IP and Standard Network
+# Creating Cross-region Load Balancing with Global IP 
+
+It is possible to create a global load balancer with VMs as backend that are not template based and with no IP or with Standard IP.
+
+The reason it is possible is because the traffic goes back through Google's global network
 
 ## Configuring instances
 * Create the network
@@ -17,7 +21,7 @@ gcloud projects add-iam-policy-binding $PROJECT \
   --role roles/editor
 ```
 
-* Create two instances in us-central1 region (remove the Standard if you want premium)
+* Create two instances in us-central1 region 
 ```
 gcloud compute instances create www-1 \
     --image-family debian-9 \
@@ -120,6 +124,14 @@ PROJECT=`gcloud config get-value project`
 VPC=global-web-app
 gcloud compute firewall-rules create www-firewall \
     --target-tags http-tag --allow tcp:80 --network $VPC
+```
+
+* firewall rule for access - remove once done with the setup - don't leave this behind
+```
+gcloud compute --project=amiteinav-sandbox \
+firewall-rules create allow-all --direction=INGRESS \
+--priority=970 --network=global-web-app --action=ALLOW \
+--rules=all --source-ranges=0.0.0.0/0
 ```
 ## Configuring services for load balancing
 * Create IPv4 global static external IP address for your load balancer.
