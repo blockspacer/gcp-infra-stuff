@@ -1,15 +1,20 @@
-#!/usr/bin/python
+#!/usr/bin/pyhton
 
 import requests
 import json
+import time
 
-url = "https://test-for-aqua-eaez4x244q-uc.a.run.app/uploads"
+##################################################
+""""
+Implement Data for Async Function
+"""
+url = "https://test-for-aqua-eaez4x244q-uc.a.run.app/upload"
 headers ={'content-type' : 'application/json'}
 
 data = {
 	'username': 'liadush',
 	'firstname': 'liad',
-	'lastname': 'hjdfksbvjskvjnskjbkdjgierughiuerhgiuehrguiheruigheriughiuerhguierhguierhguierhgiuheriughergnbjkngjbngjbnkngjbkroihefuhqeiufhwefhbsrjgoeijgiejrgoiejrgiojeriogjeroigjoeirjgoirejgioejriogjeiorjgoierjgoierjgoijergjerogjoierjgiorejgo',
+	'lastname': 'dayan',
 	'array':
 	[
   {
@@ -10003,9 +10008,16 @@ data = {
 ]
 }
 
-data_json = json.dumps(data)
-payload = {'json_payload': data_json}
+payload = json.dumps(data)
+#payload = {'json_payload': data_json}
 
-for x in range(1000):
+tasks = (
+    postme("https://test-for-aqua-eaez4x244q-uc.a.run.app/upload",payload)
+    for i in range(10)
+  )
+
+
+for x in range(100):
   x = requests.post(url,data=payload,headers=headers)
-  print (x.status_code)
+  time.sleep(1)
+  print(x.text)
