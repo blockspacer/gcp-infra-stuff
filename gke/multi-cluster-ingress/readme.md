@@ -1,5 +1,6 @@
 # Setting up a multi-cluster Ingress
-* original tutorial here > https://cloud.google.com/kubernetes-engine/docs/how-to/multi-cluster-ingress
+* Relevant tutorial here > https://cloud.google.com/kubernetes-engine/docs/how-to/multi-cluster-ingress
+* Based on this GitHub -> https://github.com/GoogleCloudPlatform/k8s-multicluster-ingress/tree/master/examples/zone-printer
 
 ## Creating the network
 * Create the VPC and the subnets
