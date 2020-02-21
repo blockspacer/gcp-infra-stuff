@@ -16,13 +16,6 @@ gcloud beta compute --project $PROJECT networks subnets create us-central-multi-
 --enable-private-ip-google-access \
 --enable-flow-logs
 
-gcloud beta compute --project $PROJECT networks subnets create us-east1-multi-ingress-subnet \
---network $VPC \
---region=us-east1 \
---range=172.16.2.0/24 \
---enable-private-ip-google-access \
---enable-flow-logs
-
 gcloud beta compute --project $PROJECT networks subnets create eu-west1-multi-ingress-subnet \
 --network $VPC \
 --region=europe-west1 \
@@ -63,14 +56,6 @@ gcloud container clusters create   \
     --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-us-central-cluster &
 
 gcloud container clusters create   \
-    --zone=us-east1-b --enable-ip-alias --image-type="COS" --num-nodes="3" --network=$VPC --subnetwork=$SUBNET_EAST \
-    --enable-cloud-logging --enable-stackdriver-kubernetes --enable-ip-alias --metadata disable-legacy-endpoints=false \
-    --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
-    --no-enable-autoupgrade \
-    --tags="allow-health-checks" \
-    --enable-autoprovisioning --min-cpu=1 --max-cpu=16 --min-memory=1 --max-memory 64 mci-us-east-cluster &
-
-gcloud container clusters create   \
     --zone=europe-west1-b --enable-ip-alias --image-type="COS" --num-nodes="3" --network=$VPC --subnetwork=$SUBNET_EU \
     --enable-cloud-logging --enable-stackdriver-kubernetes --enable-ip-alias --metadata disable-legacy-endpoints=false \
     --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
@@ -82,9 +67,6 @@ gcloud container clusters create   \
 ```
 KUBECONFIG=clusters.yaml gcloud container clusters \
     get-credentials mci-us-central-cluster  --zone=us-central1-a
-
-KUBECONFIG=clusters.yaml gcloud container clusters \
-    get-credentials mci-us-east-cluster  --zone=us-east1-b
 
 KUBECONFIG=clusters.yaml gcloud container clusters \
     get-credentials mci-europe-west-cluster --zone=europe-west1-b
@@ -114,7 +96,6 @@ sed -i -e "s/\$ZP_KUBEMCI_IP/${ZP_KUBEMCI_IP}/" ingress/ingress.yaml
 ### Make sure FW rules are there
 ```
 * Create the FW
-#VPC=`gcloud container clusters describe mci-us-central-cluster --zone us-central1-a --format="value(network)" `
 VPC=multi-ingress-vpc
 gcloud compute firewall-rules create fw-allow-health-checks-${VPC} \
     --network ${VPC} \
@@ -125,7 +106,6 @@ gcloud compute firewall-rules create fw-allow-health-checks-${VPC} \
     --rules tcp \
     --priority 300
 ```
-
 ### Deploy the multi-cluster Ingress wtih kubecmi
 ```
 wget https://storage.googleapis.com/kubemci-release/release/latest/bin/linux/amd64/kubemci
@@ -151,3 +131,32 @@ IP=`kubemci list | grep zone-printer | awk '{print $2}'`
 curl http://$IP 
 ```
 
+## Adding Pre-emptible node-pools
+* Add a pre-emptible node-pool per cluster
+```
+CLUSTERS="mci-us-central-cluster mci-europe-west-cluster"
+VPC=multi-ingress-vpc
+PROJECT=`gcloud config get-value project`
+
+for cluster in $CLUSTERS ; do
+    export ZONE=`gcloud container clusters list --format="value(zone)" \
+    --filter="name:${cluster}"` ; \
+    gcloud container node-pools create    \
+        --cluster=${cluster} \
+        --disk-size=100GB \
+        --preemptible \
+        --enable-autorepair \
+        --enable-autoupgrade \
+        --image-type="COS" \
+        --machine-type="n1-standard-16" \
+        --enable-autoscaling --max-nodes=10 --min-nodes=1 \
+        --zone=$ZONE   \
+        --metadata disable-legacy-endpoints=false \
+        --service-account "gke-mci-sa@${PROJECT}.iam.gserviceaccount.com"  \
+        --tags="allow-health-checks" \
+        ${cluster}-pvm-node-pool-1 &
+done
+```
+
+   
+DESCRIP
