@@ -14,13 +14,13 @@ gcloud compute --project $PROJECT networks create $VPC --subnet-mode=auto
 * Create the service account
 ```
 PROJECT=`gcloud config get-value project`
-gcloud iam service-accounts create gce-backend-sa \
+SA=gce-backend-sa
+gcloud iam service-accounts create ${SA} \
       --display-name "gce backend service account"
 gcloud projects add-iam-policy-binding $PROJECT \
-  --member serviceAccount:gce-backend-sa@${PROJECT}.iam.gserviceaccount.com \
+  --member serviceAccount:${SA}@${PROJECT}.iam.gserviceaccount.com \
   --role roles/editor
 ```
-
 * Create two instances in us-central1 region 
 ```
 gcloud compute instances create www-1 \
