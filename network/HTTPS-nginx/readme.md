@@ -1,14 +1,22 @@
 # HTTPS Load Balancing using NGINX and Google Compute Engine
-
 ## Obtain an SSL/TLS certificate
-
 ```
-mkdir -p ssl-certs
-cd ssl-certs
+mkdir -p ssl_cert
+cd ssl_cert
+# Create a new private key (RSA-2048 and ECDSA P-256):
 openssl genrsa -out example.key 2048
-openssl rsa -in example.key -out example.key
+# Generate a signed certificate, a CSR (Certificate Signing Request). answer with '.' on everything if you want:
 openssl req -new -key example.key -out example.csr
+# Generate a self-signed certificate by running the following command (Self-signed certificates are not suitable for public sites)
 openssl x509 -req -days 365 -in example.csr -signkey example.key -out example.crt
+```
+
+## Creating an SSL certificate resource from existing certificate files
+* If you are configuring a load balancer with multiple SSL certificates, make sure that you create an SSL certificate resource for each certificate.
+```
+gcloud compute ssl-certificates create sslcert1 \
+    --certificate ssl_cert/example.crt \
+    --private-key ssl_cert/example.key
 ```
 
 ## Create and configure the load balancer backends
@@ -81,5 +89,17 @@ for i in {1..3}; \
     curl -I -k https://${IP} ; \
     done
 ```
-
+## Install your SSL certificates
+* Upload ssl-certs directory to storage bucket
+```
+PROJECT_ID=`gcloud config get-value project`
+BUCKET=${PROJECT_ID}-ssl-certs
+REGION=us-central1
+gsutil mb -l $REGION -p $PROJECT_ID -b on gs://${BUCKET}
+gsutil cp -r ssl-certs gs://${BUCKET}
+for i in {1..3}; \
+  do \
+  gcloud compute ssh www-backend-$i "ls" ; \
+  done
+```
 
